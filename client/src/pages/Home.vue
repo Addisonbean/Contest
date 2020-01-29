@@ -1,8 +1,14 @@
 <template>
 	<div>
-		<h2>Welome!!!</h2>
+		<h1>Some header text...</h1>
 
-		<p>idk to put here</p>
+		<h2>
+			Go to current contest
+		</h2>
+
+		<h2>
+			<router-link to="/login">Log in</router-link> (if not already...)
+		</h2>
 	</div>
 </template>
 
