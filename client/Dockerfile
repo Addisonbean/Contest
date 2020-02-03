@@ -3,7 +3,7 @@ FROM node:lts-alpine
 # install simple http server for serving static content
 # RUN npm install -g http-server
 
-WORKDIR /ceapp/client
+WORKDIR /contest/client
 
 COPY package*.json ./
 
