@@ -7,20 +7,13 @@
 			<nav class="navbar navbar-expand">
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<a class="nav-link" href="">
-							Home
-						</a>
+						<router-link to="/" class="nav-link">Home</router-link>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="">
-							Problems
-						</a>
+						<router-link to="/" class="nav-link">Problems</router-link>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="">
-							<!-- if contestant -->
-							My Attempts
-						</a>
+						<router-link to="/" class="nav-link">My Attempts</router-link>
 					</li>
 				</ul>
 			</nav>

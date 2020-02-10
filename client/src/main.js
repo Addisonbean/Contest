@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 
 import Home from './pages/Home.vue';
 import Login from './pages/Login.vue';
+import Signup from './pages/Signup.vue';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
@@ -13,6 +14,7 @@ const router = new VueRouter({
 	routes: [
 		{ path: '/', component: Home },
 		{ path: '/login', component: Login },
+		{ path: '/signup', component: Signup },
 	],
 });
 

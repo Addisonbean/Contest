@@ -15,8 +15,10 @@
 </template>
 
 <script>
+import { createUser } from '../api/user.js';
+
 export default {
-	name: 'Login',
+	name: 'Signup',
 	data() {
 		return {
 			user: {
@@ -26,9 +28,10 @@ export default {
 		};
 	},
 	methods: {
-		submitForm: function() {
+		submitForm: async function() {
+			const res = await createUser({ user: this.user });
+			console.log(res);
 			console.log(this.user);
-			// do the submission...
 		},
 	},
 };
