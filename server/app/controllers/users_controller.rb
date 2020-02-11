@@ -4,6 +4,16 @@ class UsersController < ApplicationController
 		try_save(@user)
 	end
 
+	def login
+		user = User.find_by_username(params[:user][:username])
+		if user&.authenticate(params[:user][:password])
+			@auth_token = user.auth_token
+		else
+			@msg = 'Invalid username or password'
+			render 'shared/error', status: :unauthorized
+		end
+	end
+
 	private
 
 	def user_params
