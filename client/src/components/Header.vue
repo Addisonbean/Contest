@@ -20,16 +20,24 @@
 		</div>
 
 		<div class="aside">
-			<div><router-link to="/login">Log in</router-link></div>
-			<div><router-link to="/logout">Log out</router-link></div>
+			<div v-if="loggedIn">
+				<!-- doesn't work yet -->
+				<router-link to="/logout">Log out</router-link>
+			</div>
+			<div v-else>
+				<router-link to="/login">Log in</router-link>
+			</div>
 			<div>Settings?</div>
 		</div>
 	</header>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
 	name: 'Header',
+	computed: mapState(['loggedIn']),
 };
 </script>
 

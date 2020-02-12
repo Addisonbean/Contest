@@ -1,6 +1,11 @@
+import localForage from 'localforage';
 import { apiUrl } from '../env.js';
 
-async function apiRequest({ method, path, headers = {}, body = null }) {
+async function apiRequest({ method, path, headers = {}, body = null, auth = false }) {
+	if (auth) {
+		let authToken = await localForage.getItem('authToken');
+		headers = { ...headers, Authorization: authToken };
+	}
 	const res = await fetch(`${apiUrl}${path}`, {
 		method,
 		headers: {
