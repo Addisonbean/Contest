@@ -1,18 +1,4 @@
-import { apiUrl } from '../env.js';
-
-async function apiRequest({ method, path, headers = {}, body = null }) {
-	const res = await fetch(`${apiUrl}${path}`, {
-		method,
-		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
-			...headers,
-		},
-		body: body !== null ? JSON.stringify(body) : null,
-	});
-	const json = await res.json();
-	return { data: json, status: res.status };
-}
+import { apiRequest } from './util.js';
 
 function createUser(user) {
 	return apiRequest({
@@ -21,5 +7,13 @@ function createUser(user) {
 		body: user,
 	});
 }
+
+// function login(user) {
+	// return apiRequest({
+		// path: '/login',
+		// method: 'POST',
+		// body: user,
+	// });
+// }
 
 export { createUser };
