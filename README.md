@@ -9,14 +9,15 @@
 
 ### Building
 
-Before your your first time building the project, run `docker-compose build` in the project root. Then to install the node modules, run `docker-compose run client npm install`.
+To setup the project, run the following commands:
 
-To configure a manual volume for mounting containers run `docker volume create --name=pgdata`
+```
+$ docker-compose build
+$ docker-compose run client npm install
+$ docker volume create --name=pgdata
+$ docker-compose run server bundle install
+$ docker-compose run server rails db:create
+$ docker-compose run server rails db:migrate
+```
 
-To setup the server, run `docker-compose run server rails db:create`, then `docker-compose run server rails db:migrate`.
-
-After that, the project can be started with `docker-compose up`. Any changes made to the `client` directory will be automatically picked up by the npm build server. So any changes to source code shouldn't require a server restart, but updating configuration files like `package.json` will.
-
-The initial step (`docker-compose build`) will only need to be repeated whenever any of the `Dockerfile`s change.
-
-Now the site should be available at `http://localhost:8080`.
+After that, the project can be started with `docker-compose up` and it will be available at `http://localhost:8080`. Any changes made to the `client` or `server` directories will be automatically picked up by the project while running. So any changes to source code shouldn't require a server restart.
