@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import { login } from '../api/user.js';
+
 export default {
 	name: 'Login',
 	data() {
@@ -26,9 +28,13 @@ export default {
 		};
 	},
 	methods: {
-		submitForm: function() {
-			console.log(this.user);
-			// do the submission...
+		submitForm: async function() {
+			try {
+				await login(this.user);
+				this.$router.push('/contest');
+			} catch (e) {
+				// ...
+			}
 		},
 	},
 };
