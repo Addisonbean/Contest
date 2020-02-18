@@ -13,6 +13,9 @@
 						<router-link to="/" class="nav-link">Problems</router-link>
 					</li>
 					<li class="nav-item">
+						<router-link to="/Scoreboard" class="nav-link">Scoreboard</router-link>
+					</li>
+					<li class="nav-item">
 						<router-link to="/" class="nav-link">My Attempts</router-link>
 					</li>
 				</ul>
