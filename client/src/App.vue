@@ -11,6 +11,9 @@ import Header from './components/Header.vue';
 export default {
 	name: 'app',
 	components: { Header },
+	created: function() {
+		this.$store.dispatch('initializeState');
+	},
 };
 </script>
 

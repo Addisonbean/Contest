@@ -6,6 +6,8 @@ import Home from './pages/Home.vue';
 import Login from './pages/Login.vue';
 import Signup from './pages/Signup.vue';
 
+import store from './store.js';
+
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
 
@@ -21,4 +23,5 @@ const router = new VueRouter({
 new Vue({
 	render: h => h(App),
 	router,
+	store,
 }).$mount('#app');

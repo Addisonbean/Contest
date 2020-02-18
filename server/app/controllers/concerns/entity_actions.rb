@@ -13,6 +13,8 @@ module EntityActions
 		if entity.nil?
 			@msg = "Entity not found"
 			render 'shared/error', status: :not_found
+		else
+			render 'show'
 		end
 	end
 

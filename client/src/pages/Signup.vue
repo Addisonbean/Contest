@@ -9,7 +9,7 @@
 				<label for="password">Password</label>
 				<input class="form-control" type="password" id="password" v-model="user.password" />
 			</div>
-			<button type="button" class="btn btn-primary" @click="submitForm">Log in</button>
+			<button type="button" class="btn btn-primary" @click="submitForm">Create account</button>
 		</form>
 	</div>
 </template>
@@ -29,9 +29,15 @@ export default {
 	},
 	methods: {
 		submitForm: async function() {
-			const res = await createUser({ user: this.user });
-			console.log(res);
-			console.log(this.user);
+			try {
+				const res = await createUser(this.user);
+				console.log(res);
+				console.log(this.user);
+			} catch (e) {
+				console.log("got an error: ");
+				console.log(e.data);
+				console.log(e.status);
+			}
 		},
 	},
 };
@@ -40,6 +46,6 @@ export default {
 <style scoped>
 form {
 	width: 200px;
-	margin: 0 auto;
+	margin: 20px auto;
 }
 </style>
