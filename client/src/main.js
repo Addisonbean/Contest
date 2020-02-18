@@ -5,6 +5,7 @@ import VueRouter from 'vue-router';
 import Home from './pages/Home.vue';
 import Login from './pages/Login.vue';
 import Signup from './pages/Signup.vue';
+import Scoreboard from './pages/Scoreboard.vue';
 
 import store from './store.js';
 
@@ -17,6 +18,7 @@ const router = new VueRouter({
 		{ path: '/', component: Home },
 		{ path: '/login', component: Login },
 		{ path: '/signup', component: Signup },
+		{ path: '/scoreboard', component: Scoreboard },
 	],
 });
 
