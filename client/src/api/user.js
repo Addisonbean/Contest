@@ -5,12 +5,17 @@ import localForage from 'localforage';
 async function getCurrentUser() {
 	const token = await localForage.getItem('authToken');
 	if (token) {
-		const res = apiRequest({
-			path: '/user',
-			method: 'GET',
-			auth: true,
-		});
-		return res.data.user;
+		try {
+			const res = await apiRequest({
+				path: '/user',
+				method: 'GET',
+				auth: true,
+			});
+			return res.data.user;
+		} catch {
+			await localForage.removeItem('authToken');
+			return null;
+		}
 	}
 }
 
@@ -32,4 +37,9 @@ async function login(user) {
 	localForage.setItem('authToken', res.data['auth_token']);
 }
 
-export { getCurrentUser, createUser, login };
+function logout() {
+	store.commit('logout');
+	localForage.removeItem('authToken');
+}
+
+export { getCurrentUser, createUser, login, logout };

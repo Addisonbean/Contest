@@ -8,15 +8,16 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 	state: {
 		loggedIn: false,
-		user: {
-			id: 0,
-			username: '',
-		},
+		user: newEmptyUser(),
 	},
 	mutations: {
 		login: function(state, user) {
 			state.user = user;
 			state.loggedIn = true;
+		},
+		logout: function(state) {
+			state.user = newEmptyUser(),
+			state.loggedIn = false;
 		},
 	},
 	actions: {
@@ -28,3 +29,10 @@ export default new Vuex.Store({
 		},
 	},
 });
+
+function newEmptyUser() {
+	return {
+		id: 0,
+		username: '',
+	};
+}

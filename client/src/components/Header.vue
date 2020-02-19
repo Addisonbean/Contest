@@ -24,8 +24,7 @@
 
 		<div class="aside">
 			<div v-if="loggedIn">
-				<!-- doesn't work yet -->
-				<router-link to="/logout">Log out</router-link>
+				<a href="#" @click.prevent="logout">Log out</a>
 			</div>
 			<div v-else>
 				<router-link to="/login">Log in</router-link>
@@ -37,10 +36,14 @@
 
 <script>
 import { mapState } from 'vuex';
+import { logout } from '../api/user.js';
 
 export default {
 	name: 'Header',
 	computed: mapState(['loggedIn']),
+	methods: {
+		logout,
+	},
 };
 </script>
 
