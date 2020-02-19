@@ -1,4 +1,7 @@
 import localForage from 'localforage';
+import camelcaseKeys from 'camelcase-keys';
+import snakeCaseKeys from 'snakecase-keys';
+
 import { apiUrl } from '../env.js';
 
 async function apiRequest({ method, path, headers = {}, body = null, auth = false }) {
@@ -13,9 +16,9 @@ async function apiRequest({ method, path, headers = {}, body = null, auth = fals
 			'Content-Type': 'application/json',
 			...headers,
 		},
-		body: body !== null ? JSON.stringify(body) : null,
+		body: body !== null ? JSON.stringify(snakeCaseKeys(body)) : null,
 	});
-	const json = await res.json();
+	const json = camelcaseKeys(await res.json());
 	if (res.status === 200) {
 		return { data: json, status: res.status };
 	} else {
