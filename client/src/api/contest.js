@@ -9,4 +9,13 @@ function createContest(contest) {
 	});
 }
 
-export { createContest };
+function updateContest(contest) {
+	return apiRequest({
+		method: 'PUT',
+		path: '/contest',
+		auth: true,
+		body: { contest },
+	});
+}
+
+export { createContest, updateContest };
