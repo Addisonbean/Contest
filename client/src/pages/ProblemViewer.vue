@@ -13,7 +13,7 @@
         <p>{{problem.exampleOutput}}</p>
         <h1>Test Input</h1>
         <p>{{problem.testInput}}</p>
-        <h1>Test Input</h1>
+        <h1>Test Output</h1>
         <p>{{problem.testOutput}}</p>
 	</div>
 </template>
