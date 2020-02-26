@@ -18,4 +18,11 @@ function updateContest(contest) {
 	});
 }
 
-export { createContest, updateContest };
+function getCurrentContestProblems() {
+	return apiRequest({
+		method: 'GET',
+		path: '/contest/problems',
+	});
+}
+
+export { createContest, updateContest, getCurrentContestProblems };

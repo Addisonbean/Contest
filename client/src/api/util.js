@@ -18,7 +18,7 @@ async function apiRequest({ method, path, headers = {}, body = null, auth = fals
 		},
 		body: body !== null ? JSON.stringify(snakeCaseKeys(body)) : null,
 	});
-	const json = camelcaseKeys(await res.json());
+	const json = camelcaseKeys(await res.json(), { deep: true });
 	if (res.status === 200) {
 		return { data: json, status: res.status };
 	} else {

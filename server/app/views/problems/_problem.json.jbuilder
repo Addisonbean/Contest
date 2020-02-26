@@ -6,6 +6,4 @@ json.extract! problem,
 	:input_description,
 	:output_description,
 	:example_input,
-	:example_output,
-	:test_input,
-	:expected_output
+	:example_output
