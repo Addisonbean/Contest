@@ -1,4 +1,6 @@
 class Problem < ApplicationRecord
+	has_and_belongs_to_many :contests
+
 	validates :title, presence: true, uniqueness: true
 	validates :description, presence: true
 	validates :input_description, presence: true

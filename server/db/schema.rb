@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_26_193528) do
+ActiveRecord::Schema.define(version: 2020_02_26_201538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contest_problems", force: :cascade do |t|
+    t.bigint "contest_id", null: false
+    t.bigint "problem_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contest_id"], name: "index_contest_problems_on_contest_id"
+    t.index ["problem_id"], name: "index_contest_problems_on_problem_id"
+  end
 
   create_table "contests", force: :cascade do |t|
     t.string "title"
@@ -24,6 +33,15 @@ ActiveRecord::Schema.define(version: 2020_02_26_193528) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["active"], name: "index_contests_on_active"
     t.index ["title"], name: "index_contests_on_title", unique: true
+  end
+
+  create_table "contests_problems", force: :cascade do |t|
+    t.bigint "contest_id", null: false
+    t.bigint "problem_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contest_id"], name: "index_contests_problems_on_contest_id"
+    t.index ["problem_id"], name: "index_contests_problems_on_problem_id"
   end
 
   create_table "problems", force: :cascade do |t|
@@ -52,4 +70,8 @@ ActiveRecord::Schema.define(version: 2020_02_26_193528) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "contest_problems", "contests"
+  add_foreign_key "contest_problems", "problems"
+  add_foreign_key "contests_problems", "contests"
+  add_foreign_key "contests_problems", "problems"
 end
