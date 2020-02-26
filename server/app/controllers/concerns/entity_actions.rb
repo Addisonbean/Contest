@@ -9,11 +9,17 @@ module EntityActions
 		return true
 	end
 
-	def try_show(entity)
+	def assert_not_nil(entity)
 		if entity.nil?
 			@msg = "Entity not found"
 			render 'shared/error', status: :not_found
-		else
+			return false
+		end
+		return true
+	end
+
+	def try_show(entity)
+		if assert_not_nil(entity)
 			render 'show'
 		end
 	end

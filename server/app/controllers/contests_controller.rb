@@ -7,8 +7,15 @@ class ContestsController < ApplicationController
 	end
 
 	def show_current_contest
-		@contest = Contest.find_by_active(true)
+		@contest = current_contest
 		try_show(@contest)
+	end
+
+	def problems_for_current_contest
+		if assert_not_nil(current_contest)
+			@problems = current_contest.problems
+			render 'contest_problems'
+		end
 	end
 
 	private
