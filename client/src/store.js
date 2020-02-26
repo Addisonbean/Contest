@@ -34,5 +34,6 @@ function newEmptyUser() {
 	return {
 		id: 0,
 		username: '',
+		admin: false,
 	};
 }

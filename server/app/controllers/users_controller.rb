@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	before_action :authenticate_user, only: [:show_current_user]
+	before_action :authenticate_admin, only: [:create]
 
 	def create
 		@user = User.new(user_params)

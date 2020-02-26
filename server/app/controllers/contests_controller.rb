@@ -1,6 +1,6 @@
 class ContestsController < ApplicationController
+	before_action :authenticate_admin, only: [:create]
 	
-	# TODO: require admin priv
 	def create
 		@contest = Contest.new(contest_params)
 		try_save(@contest)

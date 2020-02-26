@@ -16,8 +16,7 @@ module Sessions
 	end
 
 	def authenticate_admin
-		# if current_user.nil? || !current_user?.admin
-		if current_user.nil?
+		if current_user.nil? || !current_user&.admin?
 			@msg = "Unauthorized"
 			render 'shared/error', status: :unauthorized
 			return
