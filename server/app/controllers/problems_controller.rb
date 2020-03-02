@@ -3,7 +3,16 @@ class ProblemsController < ApplicationController
 
 	def create
 		@problem = Problem.new(problem_params)
-		try_save(@problem)
+		return unless try_save(@problem)
+
+		if params[:add_to_current_contest]
+			if current_contest
+				current_contest.problems << @problem
+			else
+				@msg = 'no current contest'
+				render 'shared/error'
+			end
+		end
 	end
 
 	def show
