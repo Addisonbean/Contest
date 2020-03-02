@@ -7,4 +7,13 @@ function getProblem(idOrTitle) {
 	});
 }
 
-export { getProblem };
+function createProblem(problem, { addToCurrentContest = false }) {
+	return apiRequest({
+		method: 'POST',
+		path: '/problem',
+		body: { problem, addToCurrentContest },
+		auth: true,
+	});
+}
+
+export { getProblem, createProblem };

@@ -9,6 +9,7 @@ import Scoreboard from './pages/Scoreboard.vue';
 import ContestEditor from './pages/ContestEditor.vue';
 import Problems from './pages/Problems.vue';
 import ProblemViewer from './pages/ProblemViewer.vue';
+import CreateProblem from './pages/CreateProblem.vue';
 
 import store from './store.js';
 
@@ -23,8 +24,9 @@ const router = new VueRouter({
 		{ path: '/signup', component: Signup },
 		{ path: '/scoreboard', component: Scoreboard },
 		{ path: '/contest/new', component: ContestEditor },
-		{ path: '/problems', component: Problems},
-		{ path: '/problems/:problem', component: ProblemViewer, props: true, name: 'ProblemViewer'},
+		{ path: '/problems', component: Problems },
+		{ path: '/problems/new', component: CreateProblem },
+		{ path: '/problems/:problem', component: ProblemViewer, props: true, name: 'ProblemViewer' },
 	],
 });
 

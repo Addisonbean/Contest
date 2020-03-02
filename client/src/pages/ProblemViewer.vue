@@ -1,7 +1,7 @@
 <template>
 	<div v-if="Object.keys(problem).length">
 		<div>
-			<h1>{{problem.name}}</h1>
+			<h1>{{problem.title}}</h1>
 			<p>{{problem.backgroundInfo}}</p>
 			<p>{{problem.description}}</p>
 			<h1>Input Description</h1>

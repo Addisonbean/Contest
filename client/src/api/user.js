@@ -34,7 +34,7 @@ async function login(user) {
 		body: { user },
 	});
 	store.commit('login', res.data.user);
-	localForage.setItem('authToken', res.data['auth_token']);
+	await localForage.setItem('authToken', res.data.authToken);
 }
 
 function logout() {
