@@ -3,6 +3,8 @@ class ProblemsController < ApplicationController
 
 	def create
 		@problem = Problem.new(problem_params)
+
+		# TODO: save at the end of this function instead of here
 		return unless try_save(@problem)
 
 		if params[:add_to_current_contest]
@@ -16,12 +18,7 @@ class ProblemsController < ApplicationController
 	end
 
 	def show
-		if /\A\d+\z/ === params[:id]
-			@problem = Problem.find_by_id(params[:id])
-		else
-			title = URI.decode(params[:id])
-			@problem = Problem.find_by_title(title)
-		end
+		@problem = Problem.find_by_title_or_id(URI.decode(params[:id]))
 		try_show(@problem)
 	end
 
