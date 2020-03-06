@@ -10,4 +10,12 @@ class Problem < ApplicationRecord
 	validates :example_output, presence: true
 	validates :test_input, presence: true
 	validates :expected_output, presence: true
+
+	def self.find_by_title_or_id(id)
+		if /\A\d+\z/ === id
+			Problem.find_by_id(id)
+		else
+			Problem.find_by_title(id)
+		end
+	end
 end

@@ -4,4 +4,6 @@ class Attempt < ApplicationRecord
 	belongs_to :contest
 
 	enum status: [:pending, :accepted, :wrong_answer, :runtime_error, :compilation_error]
+
+	has_one_attached :file
 end
