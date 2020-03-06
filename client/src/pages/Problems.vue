@@ -1,5 +1,7 @@
 <template>
 	<div>
+		<h1>{{ contest.title }}</h1>
+
         <li
 			v-for="problem in problems"
 			v-bind:key="problem.id"
@@ -12,10 +14,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { getCurrentContestProblems } from '../api/contest.js';
 
 export default {
 	name: 'problems',
+	computed: mapState(['contest']),
 	data() {
 		return {
 			problems: [],
