@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_26_201538) do
+ActiveRecord::Schema.define(version: 2020_03_06_201830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attempts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "problem_id", null: false
+    t.bigint "contest_id", null: false
+    t.integer "status"
+    t.string "language"
+    t.text "runtime_output"
+    t.text "runtime_errors"
+    t.string "uploaded_as"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contest_id"], name: "index_attempts_on_contest_id"
+    t.index ["problem_id"], name: "index_attempts_on_problem_id"
+    t.index ["status"], name: "index_attempts_on_status"
+    t.index ["user_id"], name: "index_attempts_on_user_id"
+  end
 
   create_table "contest_problems", force: :cascade do |t|
     t.bigint "contest_id", null: false
@@ -70,6 +87,9 @@ ActiveRecord::Schema.define(version: 2020_02_26_201538) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "attempts", "contests"
+  add_foreign_key "attempts", "problems"
+  add_foreign_key "attempts", "users"
   add_foreign_key "contest_problems", "contests"
   add_foreign_key "contest_problems", "problems"
   add_foreign_key "contests_problems", "contests"

@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  problem: one
+  contest: one
+  status: 1
+  language: MyString
+  runtime_output: MyText
+  runtime_errors: MyText
+  uploaded_as: MyString
+
+two:
+  user: two
+  problem: two
+  contest: two
+  status: 1
+  language: MyString
+  runtime_output: MyText
+  runtime_errors: MyText
+  uploaded_as: MyString
