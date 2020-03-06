@@ -26,8 +26,7 @@ export default {
 		}
 	},
 	async created() {
-		const res = await getCurrentContestProblems();
-		this.problems = res.data.problems;
+		this.problems = await getCurrentContestProblems();
 	},
 	methods: {
 		problemPath: function(problem) {

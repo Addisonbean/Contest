@@ -69,10 +69,10 @@ export default {
 	},
 	methods: {
 		submitForm: async function() {
-			const res = await createProblem(this.problem, {
+			const problem = await createProblem(this.problem, {
 				addToCurrentContest: this.addToCurrentContest,
 			});
-			this.$router.push(`/problems/${res.data.problem.title}`);
+			this.$router.push(`/problems/${problem.title}`);
 		},
 	},
 };

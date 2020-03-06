@@ -32,8 +32,7 @@ export default {
 	},
 	async created() {
 		try {
-			const res = await getProblem(this.problemName);
-			this.problem = res.data.problem;
+			this.problem = await getProblem(this.problemName);
 		} catch (e) {
 			this.problem = {};
 		}

@@ -6,7 +6,7 @@ function createContest(contest) {
 		path: '/contest',
 		auth: true,
 		body: { contest },
-	});
+	}).then(r => r.data.contest);
 }
 
 function updateContest(contest) {
@@ -15,21 +15,21 @@ function updateContest(contest) {
 		path: '/contest',
 		auth: true,
 		body: { contest },
-	});
+	}).then(r => r.data.contest);
 }
 
 function getCurrentContestProblems() {
 	return apiRequest({
 		method: 'GET',
 		path: '/contest/problems',
-	});
+	}).then(r => r.data.problems);
 }
 
 function getCurrentContest() {
 	return apiRequest({
 		method: 'GET',
 		path: '/contest',
-	});
+	}).then(r => r.data.contest);
 }
 
 export { createContest, updateContest, getCurrentContestProblems, getCurrentContest };

@@ -24,7 +24,7 @@ function createUser(user) {
 		path: '/signup',
 		method: 'POST',
 		body: { user },
-	});
+	}).then(r => r.data.user);
 }
 
 async function login(user) {
@@ -35,6 +35,7 @@ async function login(user) {
 	});
 	store.commit('login', res.data.user);
 	await localForage.setItem('authToken', res.data.authToken);
+	return res.data.user;
 }
 
 function logout() {

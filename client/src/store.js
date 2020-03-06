@@ -33,7 +33,7 @@ export default new Vuex.Store({
 			]);
 
 			if (u) { commit('login', u) }
-			if (c) { commit('setContest', c.data.contest) }
+			if (c) { commit('setContest', c) }
 		},
 	},
 });
