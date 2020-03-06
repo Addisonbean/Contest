@@ -55,7 +55,7 @@ export default {
 	},
 	methods: {
 		submitForm: async function() {
-			if (this.contest.id !== null && this.contest.id !== undefined) {
+			if (this.contestData.id !== null && this.contestData.id !== undefined) {
 				const res = await updateContest(this.contestJson);
 				console.log(res);
 			} else {
