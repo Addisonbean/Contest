@@ -53,15 +53,6 @@ ActiveRecord::Schema.define(version: 2020_03_06_202858) do
     t.index ["user_id"], name: "index_attempts_on_user_id"
   end
 
-  create_table "contest_problems", force: :cascade do |t|
-    t.bigint "contest_id", null: false
-    t.bigint "problem_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["contest_id"], name: "index_contest_problems_on_contest_id"
-    t.index ["problem_id"], name: "index_contest_problems_on_problem_id"
-  end
-
   create_table "contests", force: :cascade do |t|
     t.string "title"
     t.datetime "start_time"
@@ -112,8 +103,6 @@ ActiveRecord::Schema.define(version: 2020_03_06_202858) do
   add_foreign_key "attempts", "contests"
   add_foreign_key "attempts", "problems"
   add_foreign_key "attempts", "users"
-  add_foreign_key "contest_problems", "contests"
-  add_foreign_key "contest_problems", "problems"
   add_foreign_key "contests_problems", "contests"
   add_foreign_key "contests_problems", "problems"
 end
