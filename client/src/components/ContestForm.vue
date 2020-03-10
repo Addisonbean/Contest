@@ -17,6 +17,10 @@
 				<label for="end-time">End time</label>
 				<input class="form-control" type="time" id="end-time" v-model="contestData.endTime" />
 			</div>
+			<div class="form-group">
+				<input class="form-check-input" type="checkbox" id="active" v-model="contestData.active" />
+				<label for="active" class="form-check-label">Make active?</label>
+			</div>
 			<button type="button" class="btn btn-primary" @click="submitForm">Create contest</button>
 		</form>
 	</div>
@@ -56,12 +60,10 @@ export default {
 	methods: {
 		submitForm: async function() {
 			if (this.contestData.id !== null && this.contestData.id !== undefined) {
-				const res = await updateContest(this.contestJson);
-				console.log(res);
+				await updateContest(this.contestJson);
 			} else {
-				const res = await createContest(this.contestJson);
-				// TODO: what to do?
-				console.log(res);
+				await createContest(this.contestJson);
+				this.$router.push('/problems/new');
 			}
 		},
 	},

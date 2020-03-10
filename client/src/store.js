@@ -26,15 +26,9 @@ export default new Vuex.Store({
 		},
 	},
 	actions: {
-		initializeState: async function({ commit }) {
-			let u = getCurrentUser();
-			let c = getCurrentContest();
-
-			u = await u;
-			if (u) { commit('login', u) }
-
-			c = await c;
-			if (c) { commit('setContest', c) }
+		initializeState: function({ commit }) {
+			getCurrentUser().then(u => commit('login', u));
+			getCurrentContest().then(c => commit('setContest', c));
 		},
 	},
 });
