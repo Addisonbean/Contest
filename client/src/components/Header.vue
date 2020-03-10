@@ -18,6 +18,12 @@
 					<li class="nav-item">
 						<router-link to="/" class="nav-link">My Attempts</router-link>
 					</li>
+					<li class="nav-item">
+						<router-link to="/contest/new" class="nav-link">Add Contest (temp)</router-link>
+					</li>
+					<li class="nav-item">
+						<router-link to="/problems/new" class="nav-link">Add Problem (temp)</router-link>
+					</li>
 				</ul>
 			</nav>
 		</div>
