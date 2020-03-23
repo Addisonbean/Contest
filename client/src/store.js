@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import { getCurrentUser } from './api/user.js';
+import { getCurrentUser, logout } from './api/user.js';
 import { getCurrentContest } from './api/contest.js';
 
 Vue.use(Vuex);
@@ -26,9 +26,23 @@ export default new Vuex.Store({
 		},
 	},
 	actions: {
-		initializeState: function({ commit }) {
-			getCurrentUser().then(u => commit('login', u));
-			getCurrentContest().then(c => commit('setContest', c));
+		initializeState: async function({ commit }) {
+			let u = getCurrentUser();
+			let c = getCurrentContest();
+
+			try {
+				u = await u;
+				if (u) { commit('login', u) }
+			} catch (e) {
+				logout();
+			}
+
+			try {
+				c = await c;
+				if (c) { commit('setContest', c) }
+			} catch (e) {
+				console.log('ugh');
+			}
 		},
 	},
 });

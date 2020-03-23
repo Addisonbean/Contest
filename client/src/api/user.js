@@ -24,6 +24,7 @@ function createUser(user) {
 		path: '/signup',
 		method: 'POST',
 		body: { user },
+		auth: true,
 	}).then(r => r.data.user);
 }
 
