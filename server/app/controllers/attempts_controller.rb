@@ -1,6 +1,7 @@
 require 'base64'
 
 class AttemptsController < ApplicationController
+	before_action :authenticate_user, only: [:create]
 
 	def create
 		# TODO: require params[:attempt][:file] to not be nil

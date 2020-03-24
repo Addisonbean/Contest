@@ -7,7 +7,7 @@ class Attempt < ApplicationRecord
 	belongs_to :problem
 	belongs_to :contest
 
-	enum status: [:pending, :accepted, :wrong_answer, :runtime_error, :compilation_error]
+	enum status: [:pending, :accepted, :wrong_answer, :runtime_error, :compilation_error, :waiting_for_judge]
 
 	has_one_attached :file
 
@@ -28,6 +28,19 @@ class Attempt < ApplicationRecord
 			end
 		when "java"
 			compile_java(path, file.filename.to_s)
+		end
+	end
+
+	def run_program(cmd, input_filename)
+		str_cmd = [*cmd, '<', input_filename].join(' ')
+
+		output, exit_status = Open3.capture2e(str_cmd)
+		update(runtime_output: output)
+
+		if exit_status.success?
+			update(status: :waiting_for_judge)
+		else
+			update(status: :runtime_error)
 		end
 	end
 
