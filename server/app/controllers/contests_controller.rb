@@ -13,7 +13,7 @@ class ContestsController < ApplicationController
 
 	def problems_for_current_contest
 		if assert_not_nil(current_contest)
-			@problems = current_contest.problems
+			@contest = current_contest
 			render 'contest_problems'
 		end
 	end
