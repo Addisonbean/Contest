@@ -18,6 +18,16 @@ services:
         - ./server/bundle:/bundle
         depends_on:
         - db
+    delayed_job:
+        build: ./server
+        command: rails jobs:work
+        environment:
+        - BUNDLE_PATH=/bundle/vendor
+        volumes:
+        - ./server:/contest/server
+        - ./server/bundle:/bundle
+        depends_on:
+        - db
     db:
         image: postgres:9.5.20
         volumes:

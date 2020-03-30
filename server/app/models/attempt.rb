@@ -11,8 +11,15 @@ class Attempt < ApplicationRecord
 
 	has_one_attached :file
 
+	def execute
+		cmd = compile_program
+		run_program(cmd, path_for_record(problem.test_input))
+	end
+
+	private
+
 	def compile_program
-		path = file_path_on_disk
+		path = path_for_record(file)
 		case language
 		when "python"
 			["python3", path]
@@ -43,8 +50,6 @@ class Attempt < ApplicationRecord
 			update(status: :runtime_error)
 		end
 	end
-
-	private
 
 	def compile(path, language_extension, &compiler_cmd)
 		uuid = SecureRandom.uuid
@@ -83,10 +88,6 @@ class Attempt < ApplicationRecord
 			update(status: :compilation_error)
 			nil
 		end
-	end
-
-	def file_path_on_disk
-		ActiveStorage::Blob.service.path_for(file.key)
 	end
 
 end

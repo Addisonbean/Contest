@@ -8,8 +8,9 @@ class Problem < ApplicationRecord
 	validates :output_description, presence: true
 	validates :example_input, presence: true
 	validates :example_output, presence: true
-	validates :test_input, presence: true
-	validates :expected_output, presence: true
+
+	has_one_attached :test_input
+	has_one_attached :expected_output
 
 	def self.find_by_title_or_id(id)
 		if /\A\d+\z/ === id

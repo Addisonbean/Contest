@@ -40,5 +40,7 @@ module Contests
 				resource '*', headers: :any, methods: [:get, :post, :options]
 			end
 		end
+
+		config.active_job.queue_adapter = :delayed_job
 	end
 end

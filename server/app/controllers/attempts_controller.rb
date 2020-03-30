@@ -28,6 +28,8 @@ class AttemptsController < ApplicationController
 
 		if try_save(@attempt)
 			file.save!
+
+			@attempt.delay.execute
 		end
 	end
 
