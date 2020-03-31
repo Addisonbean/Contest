@@ -25,4 +25,14 @@ export default {
 	text-align: center;
 	color: #2c3e50;
 }
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+	background: #242940 ;
+}
 </style>
