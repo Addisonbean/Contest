@@ -10,6 +10,7 @@ class AttemptsController < ApplicationController
 			problem_id: params[:attempt][:problem_id],
 			contest: current_contest,
 			language: params[:attempt][:language],
+			status: :pending,
 		)
 
 		if !current_contest.problems.include?(@attempt.problem)

@@ -9,6 +9,10 @@ class Attempt < ApplicationRecord
 
 	enum status: [:pending, :accepted, :wrong_answer, :runtime_error, :compilation_error, :waiting_for_judge]
 
+	# TODO: ensure it is an language that the contest accepts (only when it's created right?)
+	validates :language, presence: true
+	validates :status, presence: true
+
 	has_one_attached :file
 
 	def execute

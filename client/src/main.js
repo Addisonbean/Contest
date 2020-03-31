@@ -10,6 +10,7 @@ import ContestEditor from './pages/ContestEditor.vue';
 import Problems from './pages/Problems.vue';
 import ProblemViewer from './pages/ProblemViewer.vue';
 import CreateProblem from './pages/CreateProblem.vue';
+import SubmitAttempt from './pages/SubmitAttempt.vue';
 
 import store from './store.js';
 
@@ -27,6 +28,7 @@ const router = new VueRouter({
 		{ path: '/problems', component: Problems },
 		{ path: '/problems/new', component: CreateProblem },
 		{ path: '/problems/:problem', component: ProblemViewer, props: true, name: 'ProblemViewer' },
+		{ path: '/contest/submit', component: SubmitAttempt },
 	],
 });
 
