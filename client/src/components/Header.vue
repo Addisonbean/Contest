@@ -55,7 +55,7 @@ export default {
 
 <style scoped>
 header {
-	background-color: #f9f9f9;
+	background-color: #161A2A ;
 	padding: 20px 0;
 	display: flex;
 	content-justify: space-between;
@@ -75,18 +75,17 @@ header {
 }
 
 .nav-item {
-	background: linear-gradient(0deg, rgb(243, 243, 243) 0%, rgb(245, 245, 245) 100%);
+	background: #181D39 ;
 	border-radius: 5px;
 	margin: 0 8px;
-	border: 1px solid #eaeaea;
 }
 
 .nav-item:hover {
-	background: linear-gradient(0deg, rgb(243, 243, 243) 0%, rgb(228, 228, 228) 100%);
+	background: #161A2A ;
 }
 
 .nav-link {
-	color: #555;
+	color: #C0C0C0 ;
 	position: relative;
 }
 
@@ -95,5 +94,9 @@ header {
 }
 
 .manage-session {
+}
+
+h1{
+	color: #C0C0C0 ;
 }
 </style>
