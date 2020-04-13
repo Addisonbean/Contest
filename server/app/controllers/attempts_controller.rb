@@ -2,6 +2,7 @@ require 'base64'
 
 class AttemptsController < ApplicationController
 	before_action :authenticate_user, only: [:create]
+	before_action :authenticate_admin, only: [:grade, :show]
 
 	def create
 		# TODO: require params[:attempt][:file] to not be nil
@@ -32,6 +33,23 @@ class AttemptsController < ApplicationController
 
 			@attempt.delay.execute
 		end
+	end
+
+	def grade
+		new_status = params[:attempt][:status]
+		# TODO: verify it's either "accepted" or "wrong_answer"
+
+		@attempt = Attempt.find_by_id(params[:attempt][:id])
+		return unless assert_not_nil(@attempt)
+
+		@attempt.update(status: new_status)
+
+		render json: {}
+	end
+
+	def show
+		@attempt = Attempt.find_by_id(params[:id])
+		try_show(@attempt)
 	end
 
 end

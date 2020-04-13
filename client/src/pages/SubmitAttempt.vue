@@ -42,7 +42,7 @@
 
 <script>
 import { getCurrentContestProblems } from '../api/contest.js';
-import { submitAttempt } from '../api/problem.js';
+import { submitAttempt } from '../api/attempt.js';
 
 export default {
 	name: 'submit-attempt',

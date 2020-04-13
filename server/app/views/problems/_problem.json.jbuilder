@@ -1,4 +1,4 @@
-json.extract! problem,
+json.extract!(problem,
 	:id,
 	:title,
 	:background_info,
@@ -6,4 +6,8 @@ json.extract! problem,
 	:input_description,
 	:output_description,
 	:example_input,
-	:example_output
+	:example_output,
+)
+
+json.test_input problem.test_input.download
+json.expected_output problem.expected_output.download

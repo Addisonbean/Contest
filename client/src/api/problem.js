@@ -16,13 +16,4 @@ function createProblem(problem, { addToCurrentContest = false }) {
 	}).then(r => r.data.problem);
 }
 
-function submitAttempt(problemId, attempt) {
-	return apiRequest({
-		method: 'POST',
-		path: `/problem/${problemId}/attempt`,
-		auth: true,
-		body: { attempt },
-	});
-}
-
-export { getProblem, createProblem, submitAttempt };
+export { getProblem, createProblem };

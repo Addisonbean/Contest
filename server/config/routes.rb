@@ -11,4 +11,8 @@ Rails.application.routes.draw do
 	get '/problem/:id', to: 'problems#show'
 
 	post '/problem/:id/attempt', to: 'attempts#create'
+
+	# TODO: nest these routes under /problem/:problem_id
+	post '/attempt/:id/grade', to: 'attempts#grade'
+	get '/attempt/:id', to: 'attempts#show'
 end
