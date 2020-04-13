@@ -9,8 +9,9 @@
       <thead>
         <tr>
           <th scope="col"></th>
-          <th scope="col">Problem1</th>
-          <th scope="col">Problem2</th>
+		  <th v-for = "value in users[0].problems" v-bind:key="value.name">
+		  {{ value.name }}
+		  </th>
           <th scope="col">Totals</th>
           <th scope="col"></th>
         </tr>
