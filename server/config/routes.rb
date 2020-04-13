@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 	get '/contest', to: 'contests#show_current_contest'
 	get '/contest/problems', to: 'contests#problems_for_current_contest'
 
+	get '/scoreboard', to: 'contests#scoreboard'
+
 	post '/problem', to: 'problems#create'
 	get '/problem/:id', to: 'problems#show'
 

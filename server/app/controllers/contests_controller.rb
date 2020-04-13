@@ -18,6 +18,11 @@ class ContestsController < ApplicationController
 		end
 	end
 
+	def scoreboard
+		@contest = current_contest
+		return if assert_not_nil(@contest)
+	end
+
 	private
 
 	def contest_params
