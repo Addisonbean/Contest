@@ -9,8 +9,8 @@
 			<thead>
 				<tr>
 					<th scope="col"></th>
-					<th v-for = "value in users[0].problems" v-bind:key="value.name">
-					{{ value.name }}
+					<th v-for="p in problems" v-bind:key="p.id">
+						{{ p.title }}
 					</th>
 					<th scope="col">Totals</th>
 					<th scope="col"></th>
@@ -19,19 +19,19 @@
 			<tbody>
 				<tr>
 					<th scope="row"><strong>Team</strong></th>
-					<td v-for = "value in users[0].problems" v-bind:key="value.name">
+					<td v-for="p in problems" v-bind:key="p.id">
 						Mins <span class=spacer></span> Tries
 					</td>
 					<td> Mins <span class=spacer></span> Tries</td>
 					<td><strong>Accepted</strong></td>
 				</tr>
-				<tr v-for = "user in sortedTeams" v-bind:key="user.id">
-					<th scope="row">{{ user.userName }}</th>
-					<td v-for = "value in user.problems" v-bind:key="value.name">
-						{{ value.minutes }} <span class=spacer></span><span class=spacer></span> {{ value.tries }}
+				<tr v-for="user in sortedTeams" v-bind:key="user.id">
+					<th scope="row">{{ user.username }}</th>
+					<td v-for="p in user.problemStandings" v-bind:key="p.id">
+						{{ p.totalMinutes }} <span class=spacer></span><span class=spacer></span> {{ p.totalAttempts }}
 					</td>
-					<td>{{ totalMinutes(user) }} <span class=spacer></span><span class=spacer></span> {{ totalTries(user) }}</td>
-					<td>{{ totalSolved(user) }}</td>
+					<td>{{ user.standing.totalMinutes }} <span class=spacer></span><span class=spacer></span> {{ user.totalAttempts }}</td>
+					<td>{{ user.standing.totalSolved }}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -40,94 +40,33 @@
 </template>
 
 <script>
+import { getCurrentScoreboard } from '../api/contest.js';
+
 export default {
 	name: 'Scoreboard',
 	data() {
 		return {
-			users: [
-				{
-					id: 0,
-					userName: 'Lipscomb Gold',
-					problems: [
-						{
-							name: "Problem1",
-							minutes: 45,
-							tries: 1,
-							solved: true,
-						},
-						{
-							name: "Problem2",
-							minutes: 0,
-							tries: 1,
-							solved: false,
-						},
-					],
-				},
-				{
-					id: 1,
-					userName: 'Lipscomb Black',
-					problems: [
-						{
-							minutes: 20,
-							tries: 1,
-							solved: true,
-						},
-						{
-							minutes: 35,
-							tries: 2,
-							solved: true,
-						},
-					],
-				},
-			],
+			users: [],
+			problems: [],
 		};
-	},
-	methods: {
-		totalMinutes: function(user) {
-			let total = 0;
-			console.log(user)
-			for (let problem of user.problems){
-				if(problem.solved){
-					if(problem.tries > 1) {
-						total += (problem.tries-1)*20 + problem.minutes;
-					}
-					else{
-						total += problem.minutes;
-					}
-				}
-				console.log(problem);
-			}
-			return total;
-		},
-		totalSolved: function(user) {
-			let total = 0;
-			for (let problem of user.problems){
-				if(problem.solved){
-					total++;
-				}
-			}
-			return total;
-		},
-		totalTries: function(user) {
-			let total = 0;
-			for (let problem of user.problems){
-				total+=problem.tries;
-			}
-			return total;
-		},
 	},
 	computed: {
 		sortedTeams: function() {
-			let users2 = this.users.slice();
-			return users2.sort((user1, user2) => {
-				if(this.totalSolved(user1) > this.totalSolved(user2))
-					return -1
-				else if(this.totalSolved(user1) < this.totalSolved(user2))
-					return 1
-				else
-					return(this.totalMinutes(user1) - this.totalMinutes(user2))
+			let sortedUsers = this.users.slice();
+			return sortedUsers.sort((u1, u2) => {
+				const diff = u2.totalSolved - u1.totalSolved;
+				if (diff !== 0) {
+					return diff;
+				} else {
+					return u1.totalMinutes - u2.totalMinutes;
+				}
 			});
 		},
+	},
+	async created() {
+		let scores = await getCurrentScoreboard();
+		this.users = scores.users;
+		this.problems = scores.problems;
 	},
 };
 </script>

@@ -32,4 +32,11 @@ function getCurrentContest() {
 	}).then(r => r.data.contest);
 }
 
-export { createContest, updateContest, getCurrentContestProblems, getCurrentContest };
+function getCurrentScoreboard() {
+	return apiRequest({
+		method: 'GET',
+		path: '/scoreboard',
+	}).then(r => r.data.scoreboard);
+}
+
+export { createContest, updateContest, getCurrentContestProblems, getCurrentContest, getCurrentScoreboard };
