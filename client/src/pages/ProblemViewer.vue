@@ -24,6 +24,8 @@
 					</div>
 				</div>
 			</div>
+
+			<router-link :to="submitLink">Submit this problem</router-link>
 		</div>
 	</div>
 	<div v-else>
@@ -41,6 +43,11 @@ export default {
 			problemName: this.$route.params.problem,
 			problem: {},
 		};
+	},
+	computed: {
+		submitLink: function() {
+			return `/contest/submit?p=${this.problem.id}`;
+		},
 	},
 	async created() {
 		try {

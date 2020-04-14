@@ -50,12 +50,17 @@ export default {
 		const fileReader = new FileReader();
 		fileReader.onload = this.fileLoaded;
 
+		let problemId = this.$route.query.p;
+		if (problemId === undefined || problemId === '') {
+			problemId = null;
+		}
+
 		return {
 			problems: [],
 			uploadData: '',
 			readyToSubmit: false,
 			submissionAttempted: false,
-			problemId: null,
+			problemId,
 			language: '',
 			filename: '',
 			fileReader,
