@@ -24,8 +24,9 @@
 					</div>
 				</div>
 			</div>
-
-			<router-link :to="submitLink">Submit this problem</router-link>
+			<router-link :to="submitLink" >
+				<button class="space_after">Submit a Solution</button>
+			</router-link>
 		</div>
 	</div>
 	<div v-else>
@@ -75,8 +76,8 @@ export default {
     }
 	.input, .output {
         float: left; 
-        min-height: 250px;
         box-sizing: border-box;
+		padding: 5px;
     }
     .input {            
         width: 50%;
@@ -89,7 +90,6 @@ export default {
 		font-size: 14px;
 		padding: 10px;
         background: #d4d7dc;
-		min-height: 195px;
 		border: solid 1px;
 	}
 	.clearfix:after {
@@ -99,4 +99,7 @@ export default {
         clear: both;
         visibility: hidden;
     }
+	.space_after {
+		margin: 10px;
+	}
 </style>
