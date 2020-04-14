@@ -30,7 +30,7 @@
 					<td v-for="p in user.problemStandings" v-bind:key="p.id">
 						{{ p.totalMinutes }} <span class=spacer></span><span class=spacer></span> {{ p.totalAttempts }}
 					</td>
-					<td>{{ user.standing.totalMinutes }} <span class=spacer></span><span class=spacer></span> {{ user.totalAttempts }}</td>
+					<td>{{ user.standing.totalMinutes }} <span class=spacer></span><span class=spacer></span> {{ user.standing.totalAttempts }}</td>
 					<td>{{ user.standing.totalSolved }}</td>
 				</tr>
 			</tbody>
