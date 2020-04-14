@@ -35,4 +35,10 @@ body {
     background-attachment: fixed;
 	background: #242940 ;
 }
+
+.cf:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 </style>

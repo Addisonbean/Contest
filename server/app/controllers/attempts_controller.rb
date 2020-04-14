@@ -2,7 +2,7 @@ require 'base64'
 
 class AttemptsController < ApplicationController
 	before_action :authenticate_user, only: [:create]
-	before_action :authenticate_admin, only: [:grade, :show]
+	before_action :authenticate_admin, only: [:grade, :show, :all_for_current_contest]
 
 	def create
 		# TODO: require params[:attempt][:file] to not be nil
@@ -50,6 +50,12 @@ class AttemptsController < ApplicationController
 	def show
 		@attempt = Attempt.find_by_id(params[:id])
 		try_show(@attempt)
+	end
+
+	def all_for_current_contest
+		assert_not_nil(current_contest)
+
+		@attempts = current_contest.attempts
 	end
 
 end

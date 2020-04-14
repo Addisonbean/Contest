@@ -32,4 +32,12 @@ function gradeAttempt(id, newStatus) {
 	});
 }
 
-export { submitAttempt, getAttempt, gradeAttempt };
+function getAttemptsForCurrentContest() {
+	return apiRequest({
+		method: 'GET',
+		path: '/attempts',
+		auth: true,
+	}).then(r => r.data.attempts);
+}
+
+export { submitAttempt, getAttempt, gradeAttempt, getAttemptsForCurrentContest };

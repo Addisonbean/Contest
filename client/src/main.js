@@ -12,6 +12,7 @@ import ProblemViewer from './pages/ProblemViewer.vue';
 import CreateProblem from './pages/CreateProblem.vue';
 import SubmitAttempt from './pages/SubmitAttempt.vue';
 import GradeAttempt from './pages/GradeAttempt.vue';
+import Attempts from './pages/Attempts.vue';
 
 import store from './store.js';
 
@@ -31,6 +32,7 @@ const router = new VueRouter({
 		{ path: '/problems/:problem', component: ProblemViewer, props: true, name: 'ProblemViewer' },
 		{ path: '/contest/submit', component: SubmitAttempt },
 		{ path: '/problem/:problem_id/attempt/:id', component: GradeAttempt, props: true, name: 'GradeAttempt' },
+		{ path: '/attempts', component: Attempts },
 	],
 });
 
