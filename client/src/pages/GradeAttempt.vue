@@ -18,15 +18,21 @@
 			<pre class="input">{{ this.problem.testInput }}</pre>
 		</div>
 
-		<div class="section outputs">
-			<div>
-				<h2>Runtime output</h2>
-				<pre>{{ this.attempt.runtimeOutput }}</pre>
-			</div>
+		<div class="section">
+			<div class="diff-viewer">
+				<div>
+					<h2>Expected output</h2>
+					<div id="diff-expected">
+						<pre v-for="l in expectedLines" :key="l.key"><span :class="l.class">{{ l.text }}</span></pre>
+					</div>
+				</div>
 
-			<div>
-				<h2>Expected output</h2>
-				<pre>{{ this.problem.expectedOutput }}</pre>
+				<div>
+					<h2>Runtime output</h2>
+					<div id="diff-runtime">
+						<pre v-for="l in runtimeLines" :key="l.key"><span :class="l.class">{{ l.text }}</span></pre>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -46,6 +52,8 @@
 import { getAttempt, gradeAttempt } from '../api/attempt.js';
 import { getProblem } from '../api/problem.js';
 
+import * as Diff from 'diff';
+
 export default {
 	name: 'grade-attempt',
 	data() {
@@ -55,6 +63,8 @@ export default {
 			attempt: {
 				user: {},
 			},
+			expectedLines: [],
+			runtimeLines: [],
 		};
 	},
 	methods: {
@@ -62,6 +72,34 @@ export default {
 			if (this.status !== '') {
 				await gradeAttempt(this.attempt.id, this.status);
 			}
+		},
+		setupOutputDiff: function() {
+			const diffs = Diff.diffLines(
+				this.problem.expectedOutput,
+				this.attempt.runtimeOutput,
+			);
+			console.log(diffs);
+			let key = 0;
+			const hasContext = /\S/;
+			diffs.forEach(diff => {
+				const text = diff.value;
+
+				let blankClass = '';
+				if (!hasContext.test(text)) {
+					blankClass = ' blank';
+					console.log(diff);
+				}
+
+				if (diff.added) {
+					this.runtimeLines.push({ text, class: `diff-added${blankClass}`, key });
+				} else if (diff.removed) {
+					this.expectedLines.push({ text, class: `diff-removed${blankClass}`, key });
+				} else {
+					this.runtimeLines.push({ text, key });
+					this.expectedLines.push({ text, key });
+				}
+				key++;
+			});
 		},
 	},
 	async created() {
@@ -71,14 +109,13 @@ export default {
 
 		this.problem = await p;
 		this.attempt = await a;
+
+		this.setupOutputDiff();
 	},
 };
 </script>
 
 <style scoped>
-	/* TODO */
-	/* make h2 not bold, except the team name and prob name part */
-
 	.container {
 		width: 1500px;
 	}
@@ -99,16 +136,48 @@ export default {
 		margin: 0 auto;
 	}
 
-	.outputs {
+	.select-status {
+		margin-left: 15px;
+	}
+
+	.diff-viewer {
 		display: flex;
 		justify-content: space-evenly;
 	}
 
-	.outputs > div {
+	.diff-viewer > div {
 		width: 40%;
 	}
 
-	.select-status {
-		margin-left: 15px;
+	.diff-viewer > div > div {
+		background-color: #ccc;
+		padding: 15px;
+	}
+
+	.diff-viewer pre {
+		margin: 0;
+		padding: 0;
+		overflow: visible;
+	}
+
+	.diff-added {
+		background-color: rgba(0, 128, 0, 0.3);
+	}
+
+	.diff-removed {
+		background-color: rgba(255, 0, 0, 0.3);
+	}
+
+	.diff-added.blank:before {
+		content: '+';
+	}
+
+	.diff-removed.blank:before {
+		content: '-';
+	}
+
+	.blank {
+		left: -10px;
+		position: relative;
 	}
 </style>

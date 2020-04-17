@@ -72,7 +72,8 @@ export default {
 	}
 	.container {
         width: 100%;
-        background: #f2f2f2; 
+		background: #f2f2f2;
+		color: #2c3e50;
     }
 	.input, .output {
         float: left; 
