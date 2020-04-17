@@ -3,12 +3,16 @@
 		<ul class="attempt-list">
 			<li v-for="a in attempts" :key="a.id">
 				<div class="cf">
-					<p class="left">{{ a.problem.title }}</p>
+					<h3 class="left">{{ a.problem.title }}</h3>
 					<p class="right">{{ formatDateTime(a.createdAt) }}</p>
 				</div>
 
+				<div>
+					<p class="team-name">Team - {{ a.user.username }}</p>
+				</div>
+
 				<div class="cf">
-					<p class="left">Team - {{ a.user.username }}</p>
+					<p class="left">Status - {{ a.status }}</p>
 					<router-link :to="linkForAttempt(a)" class="right">View submission</router-link>
 				</div>
 			</li>
@@ -54,6 +58,10 @@ export default {
 	text-align: center;
 	border-bottom: 1px solid #555;
 	text-align: left;
+}
+
+.team-name {
+	margin: 0.5em 0 0.25em;
 }
 
 .left {
