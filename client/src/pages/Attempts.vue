@@ -2,11 +2,14 @@
 	<div>
 		<ul class="attempt-list">
 			<li v-for="a in attempts" :key="a.id">
-				<p>{{ a.problem.title }}</p>
+				<div class="cf">
+					<p class="left">{{ a.problem.title }}</p>
+					<p class="right">{{ formatDateTime(a.createdAt) }}</p>
+				</div>
 
 				<div class="cf">
-					<p class="attempt-team">Team - {{ a.user.username }}</p>
-					<router-link :to="linkForAttempt(a)" class="attempt-link">View submission</router-link>
+					<p class="left">Team - {{ a.user.username }}</p>
+					<router-link :to="linkForAttempt(a)" class="right">View submission</router-link>
 				</div>
 			</li>
 		</ul>
@@ -16,6 +19,7 @@
 
 <script>
 import { getAttemptsForCurrentContest } from '../api/attempt.js';
+import { formatDateTime } from '../api/util.js';
 
 export default {
 	name: 'attempts',
@@ -26,12 +30,13 @@ export default {
 	},
 	async created() {
 		this.attempts = await getAttemptsForCurrentContest();
-		console.log(this.attempts);
+		this.attempts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 	},
 	methods: {
 		linkForAttempt: function(attempt) {
 			return `/problem/${attempt.problem.id}/attempt/${attempt.id}`;
-		}
+		},
+		formatDateTime,
 	},
 };
 </script>
@@ -51,11 +56,11 @@ export default {
 	text-align: left;
 }
 
-.attempt-team {
+.left {
 	float: left;
 }
 
-.attempt-link {
+.right {
 	float: right;
 }
 </style>

@@ -5,7 +5,13 @@
 		</div>
 
 		<div class="section">
-			<h2>Team: {{ this.attempt.user.username }}</h2>
+			<h2>Team</h2>
+			<p>{{ this.attempt.user.username }}</p>
+		</div>
+
+		<div class="section">
+			<h2>Time submitted</h2>
+			<p>{{ formatDateTime(this.attempt.createdAt) }}</p>
 		</div>
 
 		<div class="section">
@@ -51,6 +57,7 @@
 <script>
 import { getAttempt, gradeAttempt } from '../api/attempt.js';
 import { getProblem } from '../api/problem.js';
+import { formatDateTime } from '../api/util.js';
 
 import * as Diff from 'diff';
 
@@ -101,6 +108,7 @@ export default {
 				key++;
 			});
 		},
+		formatDateTime,
 	},
 	async created() {
 		// TODO: Ensure problem is the right one???

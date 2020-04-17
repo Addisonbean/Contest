@@ -1,5 +1,5 @@
 json.attempts @attempts do |a|
-	json.extract! a, :id, :status
+	json.extract! a, :id, :status, :created_at
 
 	json.user do
 		json.extract! a.user, :id, :username
