@@ -82,8 +82,8 @@ export default {
 		},
 		setupOutputDiff: function() {
 			const diffs = Diff.diffLines(
-				this.problem.expectedOutput,
-				this.attempt.runtimeOutput,
+				this.problem.expectedOutput + '\n',
+				this.attempt.runtimeOutput + '\n',
 			);
 			console.log(diffs);
 			let key = 0;
