@@ -1,24 +1,38 @@
 <template>
-	<div>
-		<h2>Problem: {{ this.problem.title }}</h2>
+	<div class="container">
+		<div class="section">
+			<h2>Problem: {{ this.problem.title }}</h2>
+		</div>
 
-		<h2>Team: {{ this.attempt.user.username }}</h2>
+		<div class="section">
+			<h2>Team: {{ this.attempt.user.username }}</h2>
+		</div>
 
-		<h2>Input used</h2>
-		<pre>{{ this.problem.testInput }}</pre>
+		<div class="section">
+			<h2>Status</h2>
+			<p>{{ this.attempt.status }}</p>
+		</div>
 
-		<h2>Expected output</h2>
-		<pre>{{ this.problem.expectedOutput }}</pre>
+		<div class="section">
+			<h2>Input used</h2>
+			<pre class="input">{{ this.problem.testInput }}</pre>
+		</div>
 
-		<h2>Runtime output</h2>
-		<pre>{{ this.attempt.runtimeOutput }}</pre>
+		<div class="section outputs">
+			<div>
+				<h2>Runtime output</h2>
+				<pre>{{ this.attempt.runtimeOutput }}</pre>
+			</div>
 
-		<h2>Status</h2>
-		<pre>{{ this.attempt.status }}</pre>
+			<div>
+				<h2>Expected output</h2>
+				<pre>{{ this.problem.expectedOutput }}</pre>
+			</div>
+		</div>
 
-		<div class="form-group">
+		<div class="section form-group">
 			<label for="status">Status</label>
-			<select id="status" v-model="status">
+			<select class="select-status" id="status" v-model="status">
 				<option value="accepted">Accept</option>
 				<option value="wrong_answer">Wrong Answer</option>
 			</select>
@@ -61,5 +75,40 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+	/* TODO */
+	/* make h2 not bold, except the team name and prob name part */
+
+	.container {
+		width: 1500px;
+	}
+
+	.section {
+		margin: 20px 0;
+	}
+
+	pre {
+		color: #333;
+		background-color: #ccc;
+		text-align: left;
+		padding: 15px;
+	}
+
+	.input {
+		width: 50%;
+		margin: 0 auto;
+	}
+
+	.outputs {
+		display: flex;
+		justify-content: space-evenly;
+	}
+
+	.outputs > div {
+		width: 40%;
+	}
+
+	.select-status {
+		margin-left: 15px;
+	}
 </style>
