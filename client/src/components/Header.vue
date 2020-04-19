@@ -18,11 +18,8 @@
 					<li class="nav-item">
 						<router-link to="/" class="nav-link">My Attempts</router-link>
 					</li>
-					<li class="nav-item">
-						<router-link to="/contest/new" class="nav-link">Add Contest (temp)</router-link>
-					</li>
-					<li class="nav-item">
-						<router-link to="/problems/new" class="nav-link">Add Problem (temp)</router-link>
+					<li class="nav-item" v-if="displayAdminLinks">
+						<router-link to="/judge" class="nav-link">Judge Menu</router-link>
 					</li>
 				</ul>
 			</nav>
@@ -46,9 +43,15 @@ import { logout } from '../api/user.js';
 
 export default {
 	name: 'Header',
-	computed: mapState(['loggedIn']),
 	methods: {
 		logout,
+	},
+	computed: {
+		...mapState(['loggedIn', 'user']),
+
+		displayAdminLinks: function() {
+			return this.user.admin;
+		},
 	},
 };
 </script>
