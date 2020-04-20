@@ -1,9 +1,10 @@
 import { apiRequest } from './util.js';
 
-function getProblem(idOrTitle) {
+function getProblem(idOrTitle, requireAdmin = false) {
 	return apiRequest({
 		method: 'GET',
 		path: `/problem/${encodeURIComponent(idOrTitle)}`,
+		auth: requireAdmin,
 	}).then(r => r.data.problem);
 }
 

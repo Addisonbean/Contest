@@ -38,6 +38,7 @@ class ProblemsController < ApplicationController
 
 	def show
 		@problem = Problem.find_by_title_or_id(URI.decode(params[:id]))
+		@current_user = current_user
 		try_show(@problem)
 	end
 

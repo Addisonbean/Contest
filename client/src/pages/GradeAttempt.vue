@@ -112,7 +112,7 @@ export default {
 	},
 	async created() {
 		// TODO: Ensure problem is the right one???
-		let p = getProblem(this.$route.params.problem_id);
+		let p = getProblem(this.$route.params.problem_id, true);
 		let a = getAttempt(this.$route.params.id);
 
 		this.problem = await p;
