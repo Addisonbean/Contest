@@ -24,9 +24,16 @@
 					</div>
 				</div>
 			</div>
-			<router-link :to="submitLink" >
-				<button class="space_after">Submit a Solution</button>
-			</router-link>
+			<div>
+				<router-link :to="submitLink">
+					<button class="space_after">Submit a Solution</button>
+				</router-link>
+			</div>
+			<div>
+				<router-link :to="editLink" v-if="user.admin">
+					Edit problem
+				</router-link>
+			</div>
 		</div>
 	</div>
 	<div v-else>
@@ -35,6 +42,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { getProblem } from '../api/problem.js';
 
 export default {
@@ -49,6 +57,10 @@ export default {
 		submitLink: function() {
 			return `/contest/submit?p=${this.problem.id}`;
 		},
+		editLink: function() {
+			return `/problems/${this.problem.id}/edit`;
+		},
+		...mapState(['user']),
 	},
 	async created() {
 		try {

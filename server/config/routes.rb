@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
 	post '/problem', to: 'problems#create'
 	get '/problem/:id', to: 'problems#show'
+	post '/problem/:id/edit', to: 'problems#edit'
 
 	post '/problem/:id/attempt', to: 'attempts#create'
 
