@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<error-msg :errors="errors" />
 		<div class="form-group">
 			<label for="problem">Problem</label>
 			<select id="problem" name="problem" v-model="problemId">
@@ -43,9 +44,11 @@
 <script>
 import { getCurrentContestProblems } from '../api/contest.js';
 import { submitAttempt } from '../api/attempt.js';
+import ErrorMsg from '../components/ErrorMsg.vue';
 
 export default {
 	name: 'submit-attempt',
+	components: { ErrorMsg },
 	data() {
 		const fileReader = new FileReader();
 		fileReader.onload = this.fileLoaded;
@@ -64,6 +67,8 @@ export default {
 			language: '',
 			filename: '',
 			fileReader,
+			errors: [],
+			fileUploadStarted: false,
 		};
 	},
 	async created() {
@@ -73,19 +78,24 @@ export default {
 	methods: {
 		fileChanged: function(e) {
 			this.readyToSubmit = false;
+			this.fileUploadStarted = e.target.files.length > 0;
 			if (e.target.files.length === 0) return;
 
 			this.filename = e.target.files[0].name;
 			this.fileReader.readAsText(e.target.files[0], "UTF-8");
 		},
 		fileLoaded: function(e) {
-			this.uploadData = btoa(e.target.result);
+			try {
+				this.uploadData = btoa(e.target.result);
+			} catch (e) {
+				this.errors = ['Failed to read file at UTF-8. Please make sure you are submitting source code and not a compiled binary.']
+			}
 			this.readyToSubmit = true;
 			if (this.submissionAttempted) {
 				this.submitForm();
 			}
 		},
-		submitForm: function() {
+		submitForm: async function() {
 			this.submissionAttempted = true;
 			if (this.readyToSubmit) {
 				const data = {
@@ -96,7 +106,17 @@ export default {
 						filename: this.filename,
 					},
 				};
-				submitAttempt(this.problemId, data);
+				try {
+					await submitAttempt(this.problemId, data);
+				} catch (e) {
+					if (e.data.msg) {
+						this.errors = [e.data.msg];
+					} else {
+						this.errors = e.data.errors;
+					}
+				}
+			} else if (!this.fileUploadStarted) {
+				this.errors = ['Please upload a file'];
 			}
 		},
 	},

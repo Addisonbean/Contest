@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<error-msg :errors="errors" />
 		<form>
 			<div class="form-group">
 				<label for="username">Username</label>
@@ -16,15 +17,18 @@
 
 <script>
 import { login } from '../api/user.js';
+import ErrorMsg from '../components/ErrorMsg.vue';
 
 export default {
 	name: 'Login',
+	components: { ErrorMsg },
 	data() {
 		return {
 			user: {
 				username: '',
 				password: '',
 			},
+			errors: [],
 		};
 	},
 	methods: {
@@ -33,7 +37,7 @@ export default {
 				await login(this.user);
 				this.$router.push('/contest');
 			} catch (e) {
-				// ...
+				this.errors = [e.data.msg];
 			}
 		},
 	},
