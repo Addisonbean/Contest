@@ -23,7 +23,7 @@
 
 <script>
 import { getAttemptsForCurrentContest } from '../api/attempt.js';
-import { formatDateTime } from '../api/util.js';
+import { formatDateTime } from '../util.js';
 
 export default {
 	name: 'attempts',

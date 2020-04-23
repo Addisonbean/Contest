@@ -57,7 +57,7 @@
 <script>
 import { getAttempt, gradeAttempt } from '../api/attempt.js';
 import { getProblem } from '../api/problem.js';
-import { formatDateTime } from '../api/util.js';
+import { formatDateTime } from '../util.js';
 
 import * as Diff from 'diff';
 

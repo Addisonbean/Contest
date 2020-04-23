@@ -1,7 +1,6 @@
 import localForage from 'localforage';
 import camelcaseKeys from 'camelcase-keys';
 import snakeCaseKeys from 'snakecase-keys';
-import moment from 'moment';
 
 import { apiUrl } from '../env.js';
 
@@ -31,8 +30,4 @@ async function apiRequest({ method, path, headers = {}, body = null, auth = fals
 	// TODO: throw an error if not 200 OK
 }
 
-function formatDateTime(dateTimeLike) {
-	return moment(dateTimeLike).format('h:mm:ss A, MM/DD/YY');
-}
-
-export { apiRequest, formatDateTime };
+export { apiRequest };
