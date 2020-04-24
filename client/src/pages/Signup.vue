@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<error-msg :api-error="apiError" />
 		<form>
 			<div class="form-group">
 				<label for="username">Username</label>
@@ -16,15 +17,18 @@
 
 <script>
 import { createUser } from '../api/user.js';
+import ErrorMsg from '../components/ErrorMsg.vue';
 
 export default {
 	name: 'Signup',
+	components: { ErrorMsg },
 	data() {
 		return {
 			user: {
 				username: '',
 				password: '',
 			},
+			apiError: {},
 		};
 	},
 	methods: {
@@ -34,9 +38,7 @@ export default {
 				console.log(res);
 				console.log(this.user);
 			} catch (e) {
-				console.log("got an error: ");
-				console.log(e.data);
-				console.log(e.status);
+				this.apiError = e.data;
 			}
 		},
 	},
