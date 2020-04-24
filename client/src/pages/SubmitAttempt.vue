@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<error-msg :errors="errors" />
+		<error-msg :api-error="apiError" :errors="errors" />
 		<div class="form-group">
 			<label for="problem">Problem</label>
 			<select id="problem" name="problem" v-model="problemId">
@@ -68,6 +68,7 @@ export default {
 			filename: '',
 			fileReader,
 			errors: [],
+			apiError: {},
 			fileUploadStarted: false,
 		};
 	},
@@ -88,7 +89,8 @@ export default {
 			try {
 				this.uploadData = btoa(e.target.result);
 			} catch (e) {
-				this.errors = ['Failed to read file at UTF-8. Please make sure you are submitting source code and not a compiled binary.']
+				this.errors = ['Failed to read file as UTF-8. Please make sure you are submitting source code and not a compiled binary.'];
+				return;
 			}
 			this.readyToSubmit = true;
 			if (this.submissionAttempted) {
@@ -98,6 +100,8 @@ export default {
 		submitForm: async function() {
 			this.submissionAttempted = true;
 			if (this.readyToSubmit) {
+				this.errors = [];
+				this.apiError = {};
 				const data = {
 					language: this.language,
 					problemId: this.problemId,
@@ -109,11 +113,7 @@ export default {
 				try {
 					await submitAttempt(this.problemId, data);
 				} catch (e) {
-					if (e.data.msg) {
-						this.errors = [e.data.msg];
-					} else {
-						this.errors = e.data.errors;
-					}
+					this.apiError = e.data;
 				}
 			} else if (!this.fileUploadStarted) {
 				this.errors = ['Please upload a file'];

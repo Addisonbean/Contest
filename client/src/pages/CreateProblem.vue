@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<error-msg :api-error="apiErrors" />
 		<form>
 			<div class="form-group">
 				<label for="title">Title</label>
@@ -48,9 +49,11 @@
 
 <script>
 import { createProblem } from '../api/problem.js';
+import ErrorMsg from '../components/ErrorMsg.vue';
 
 export default {
 	name: 'create-problem',
+	components: { ErrorMsg },
 	data() {
 		return {
 			problem: {
@@ -65,14 +68,19 @@ export default {
 				expectedOutput: '',
 			},
 			addToCurrentContest: false,
+			apiErrors: {},
 		};
 	},
 	methods: {
 		submitForm: async function() {
-			const problem = await createProblem(this.problem, {
-				addToCurrentContest: this.addToCurrentContest,
-			});
-			this.$router.push(`/problems/${problem.title}`);
+			try {
+				const problem = await createProblem(this.problem, {
+					addToCurrentContest: this.addToCurrentContest,
+				});
+				this.$router.push(`/problems/${problem.title}`);
+			} catch (e) {
+				this.apiErrors = e.data;
+			}
 		},
 	},
 };

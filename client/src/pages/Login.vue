@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<error-msg :errors="errors" />
+		<error-msg :api-error="apiError" />
 		<form>
 			<div class="form-group">
 				<label for="username">Username</label>
@@ -28,7 +28,7 @@ export default {
 				username: '',
 				password: '',
 			},
-			errors: [],
+			apiError: {},
 		};
 	},
 	methods: {
@@ -37,7 +37,7 @@ export default {
 				await login(this.user);
 				this.$router.push('/contest');
 			} catch (e) {
-				this.errors = [e.data.msg];
+				this.apiError = e.data;
 			}
 		},
 	},

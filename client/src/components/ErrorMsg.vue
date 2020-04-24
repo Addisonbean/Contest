@@ -10,20 +10,42 @@
 <script>
 export default {
 	name: 'error-msg',
-	props: ['errors'],
+	props: {
+		errors: {
+			required: false,
+			default: () => [],
+		},
+		apiError: {
+			required: false,
+			default: () => { return {} },
+		},
+	},
 	computed: {
 		formattedErrors: function() {
-			if (Array.isArray(this.errors)) {
-				return this.errors;
-			} else if (typeof this.errors === 'string') {
-				return [this.errors];
+			let errors = this.formatError(this.errors);
+			if (this.apiError.msg) {
+				errors = errors.concat(this.formatError(this.apiError.msg));
+			}
+			if (this.apiError.errors) {
+				errors = errors.concat(this.formatError(this.apiError.errors));
+			}
+			return errors;
+		},
+	},
+	methods: {
+		formatError: function(e) {
+			if (Array.isArray(e)) {
+				return e;
+			} else if (typeof e === 'string') {
+				return e.length ? [e] : [];
 			} else {
 				let errors = [];
-				for (let [key, value] of Object.entries(this.errors)) {
+				for (let [key, value] of Object.entries(e)) {
 					errors.push(`${key} ${value}`);
 				}
 				return errors;
 			}
+
 		},
 	},
 };

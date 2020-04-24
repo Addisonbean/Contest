@@ -1,5 +1,7 @@
 <template>
 	<div>
+		<error-msg :api-error="errors" />
+
 		<form>
 			<div class="form-group">
 				<label for="title">Title</label>
@@ -27,9 +29,11 @@
 </template>
 <script>
 import { createContest, updateContest } from '../api/contest.js';
+import ErrorMsg from '../components/ErrorMsg.vue';
 
 export default {
 	name: 'contest-form',
+	components: { ErrorMsg },
 	props: {
 		contest: Object,
 		default: {},
@@ -45,6 +49,7 @@ export default {
 		};
 		return {
 			contestData: { ...emptyContest, ...this.contest },
+			errors: {},
 		};
 	},
 	computed: {
@@ -59,11 +64,15 @@ export default {
 	},
 	methods: {
 		submitForm: async function() {
-			if (this.contestData.id !== null && this.contestData.id !== undefined) {
-				await updateContest(this.contestJson);
-			} else {
-				await createContest(this.contestJson);
-				this.$router.push('/problems/new');
+			try {
+				if (this.contestData.id !== null && this.contestData.id !== undefined) {
+					await updateContest(this.contestJson);
+				} else {
+					await createContest(this.contestJson);
+					this.$router.push('/problems/new');
+				}
+			} catch (e) {
+				this.errors = e.data;
 			}
 		},
 	},
