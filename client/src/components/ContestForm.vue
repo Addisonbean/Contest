@@ -23,21 +23,19 @@
 				<input class="form-check-input" type="checkbox" id="active" v-model="contestData.active" />
 				<label for="active" class="form-check-label">Make active?</label>
 			</div>
-			<button type="button" class="btn btn-primary" @click="submitForm">Create contest</button>
+			<button type="button" class="btn btn-primary" @click="submitForm">{{ buttonText }}</button>
 		</form>
 	</div>
 </template>
 <script>
-import { createContest, updateContest } from '../api/contest.js';
+import { createContest, updateContest, getContest } from '../api/contest.js';
 import ErrorMsg from '../components/ErrorMsg.vue';
+import moment from 'moment';
 
 export default {
 	name: 'contest-form',
 	components: { ErrorMsg },
-	props: {
-		contest: Object,
-		default: {},
-	},
+	props: ['contestId'],
 	data() {
 		const emptyContest = {
 			id: null,
@@ -48,33 +46,57 @@ export default {
 			active: false,
 		};
 		return {
-			contestData: { ...emptyContest, ...this.contest },
+			contestData: emptyContest,
 			errors: {},
 		};
 	},
 	computed: {
+		isUpdate: function() {
+			return this.contestId !== null && this.contestId !== undefined;
+		},
 		contestJson: function() {
 			return {
 				title: this.contestData.title,
 				startTime: new Date(`${this.contestData.date} ${this.contestData.startTime}`),
 				endTime: new Date(`${this.contestData.date} ${this.contestData.endTime}`),
 				active: this.contestData.active,
+				id: this.contestData.id,
 			};
+		},
+		buttonText: function() {
+			if (this.isUpdate) {
+				return "Update Contest";
+			} else {
+				return "Create Contest";
+			}
 		},
 	},
 	methods: {
 		submitForm: async function() {
 			try {
-				if (this.contestData.id !== null && this.contestData.id !== undefined) {
+				if (this.isUpdate) {
 					await updateContest(this.contestJson);
 				} else {
 					await createContest(this.contestJson);
-					this.$router.push('/problems/new');
+					this.$router.push('/problem/new');
 				}
 			} catch (e) {
 				this.errors = e.data;
 			}
 		},
+	},
+	async created() {
+		if (this.contestId !== null && this.contestId !== undefined) {
+			const c = await getContest(this.contestId);
+			console.log(c);
+
+			this.contestData.id = c.id;
+			this.contestData.title = c.title;
+			this.contestData.date = moment(c.startTime).format('YYYY-MM-DD');
+			this.contestData.startTime = moment(c.startTime).format('kk:mm');
+			this.contestData.endTime = moment(c.endTime).format('kk:mm');
+			this.contestData.active = c.active;
+		}
 	},
 };
 </script>

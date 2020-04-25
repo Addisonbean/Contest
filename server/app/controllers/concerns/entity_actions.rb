@@ -9,6 +9,15 @@ module EntityActions
 		return true
 	end
 
+	def try_update(entity, params)
+		if !entity.update(params)
+			@errors = entity.errors.messages
+			render 'shared/error', status: :bad_request
+			return false
+		end
+		return true
+	end
+
 	def assert_not_nil(entity)
 		if entity.nil?
 			@msg = "Entity not found"

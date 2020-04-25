@@ -4,8 +4,10 @@ Rails.application.routes.draw do
 	get '/user', to: 'users#show_current_user'
 
 	post '/contest', to: 'contests#create'
+	post '/contest/update', to: 'contests#update'
 	get '/contest', to: 'contests#show_current_contest'
 	get '/contest/problems', to: 'contests#problems_for_current_contest'
+	get '/contest/:id', to: 'contests#show'
 
 	get '/scoreboard', to: 'contests#scoreboard'
 

@@ -1,9 +1,14 @@
 class ContestsController < ApplicationController
-	before_action :authenticate_admin, only: [:create]
+	before_action :authenticate_admin, only: [:create, :update]
 	
 	def create
 		@contest = Contest.new(contest_params)
 		try_save(@contest)
+	end
+
+	def show
+		@contest = Contest.find_by_id(params[:id])
+		try_show(@contest)
 	end
 
 	def show_current_contest
@@ -21,6 +26,13 @@ class ContestsController < ApplicationController
 	def scoreboard
 		@contest = current_contest
 		return if assert_not_nil(@contest)
+	end
+
+	def update
+		@contest = Contest.find_by_id(params[:contest][:id])
+		return unless assert_not_nil(@contest)
+
+		render 'show' if try_update(@contest, contest_params)
 	end
 
 	private

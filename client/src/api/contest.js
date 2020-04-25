@@ -11,8 +11,8 @@ function createContest(contest) {
 
 function updateContest(contest) {
 	return apiRequest({
-		method: 'PUT',
-		path: '/contest',
+		method: 'POST',
+		path: '/contest/update',
 		auth: true,
 		body: { contest },
 	}).then(r => r.data.contest);
@@ -39,4 +39,12 @@ function getCurrentScoreboard() {
 	}).then(r => r.data.scoreboard);
 }
 
-export { createContest, updateContest, getCurrentContestProblems, getCurrentContest, getCurrentScoreboard };
+function getContest(id) {
+	return apiRequest({
+		method: 'GET',
+		path: `/contest/${id}`,
+		auth: true,
+	}).then(r => r.data.contest);
+}
+
+export { createContest, updateContest, getCurrentContestProblems, getCurrentContest, getCurrentScoreboard, getContest };

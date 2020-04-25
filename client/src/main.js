@@ -29,6 +29,7 @@ const router = new VueRouter({
 		{ path: '/signup', component: Signup },
 		{ path: '/scoreboard', component: Scoreboard },
 		{ path: '/contest/new', component: ContestEditor },
+		{ path: '/contest/:id/edit', component: ContestEditor },
 		{ path: '/problems', component: Problems },
 		{ path: '/problem/new', component: CreateProblem },
 		{ path: '/problems/:problem', component: ProblemViewer, props: true, name: 'ProblemViewer' },
