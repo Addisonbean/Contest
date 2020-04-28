@@ -52,12 +52,8 @@ export default {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
-<<<<<<< Updated upstream
 	/* color: #2c3e50; */
 	color: #ccc;
-=======
-	color: #ffffff;
->>>>>>> Stashed changes
 }
 html {
     min-height: 100%;
