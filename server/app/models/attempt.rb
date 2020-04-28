@@ -21,7 +21,7 @@ class Attempt < ApplicationRecord
 	end
 
 	def minutes_since_contest_start
-		mins = (created_at - contest.start_time) * 24 * 60
+		mins = (created_at - contest.start_time) / 1.minutes
 		mins.floor
 	end
 

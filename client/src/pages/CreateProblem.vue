@@ -7,12 +7,12 @@
 				<input class="form-control" type="text" id="title" v-model="problem.title" />
 			</div>
 			<div class="form-group">
-				<label for="description">Description</label>
-				<textarea class="form-control" id="description" v-model="problem.description"></textarea>
-			</div>
-			<div class="form-group">
 				<label for="background-info">Background Information</label>
 				<textarea class="form-control" id="background-info" v-model="problem.backgroundInfo"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="description">Description</label>
+				<textarea class="form-control" id="description" v-model="problem.description"></textarea>
 			</div>
 			<div class="form-group">
 				<label for="input-description">Input Description</label>

@@ -15,7 +15,7 @@
 					<li class="nav-item">
 						<router-link to="/scoreboard" class="nav-link">Scoreboard</router-link>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item" v-if="displayMyAttempts">
 						<router-link to="/" class="nav-link">My Attempts</router-link>
 					</li>
 					<li class="nav-item" v-if="displayAdminLinks">
@@ -51,6 +51,9 @@ export default {
 
 		displayAdminLinks: function() {
 			return this.user.admin;
+		},
+		displayMyAttempts: function() {
+			return this.loggedIn && !this.user.admin;
 		},
 	},
 };

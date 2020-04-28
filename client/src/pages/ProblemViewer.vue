@@ -14,13 +14,13 @@
 				<div class="input">
 					<h3>Example Input</h3>
 					<div class="console">
-						<p>{{problem.exampleInput}}</p>
+						<p><pre>{{problem.exampleInput}}</pre></p>
 					</div>
 				</div>
 				<div class="output">
 					<h3>Example Output</h3>
 					<div class="console">
-						<p>{{problem.exampleOutput}}</p>
+						<p><pre>{{problem.exampleOutput}}</pre></p>
 					</div>
 				</div>
 			</div>
