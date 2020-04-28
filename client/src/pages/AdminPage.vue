@@ -5,19 +5,19 @@
 		<h3>Current contest</h3>
 		<ul class= "navList">
 			<li>
-				<router-link to="/attempts">View attempts</router-link>
+				<router-link to="/attempts"><button>View attempts</button></router-link>
 			</li>
 		</ul>
 		<h3>General links</h3>
 		<ul class = "navList">
 			<li>
-				<router-link to="/contest/new">Add new contest</router-link>
-			</li>
+				<router-link to="/contest/new"><button>Add new contest</button></router-link>
+			</li><br>
 			<li>
-				<router-link to="/problem/new">Add new problem</router-link>
-			</li>
+				<router-link to="/problem/new"><button>Add new problem</button></router-link>
+			</li><br>
 			<li>
-				<router-link to="/signup">Add new user</router-link>
+				<router-link to="/signup"><button>Add new user</button></router-link>
 			</li>
 		</ul>
 	</div>
