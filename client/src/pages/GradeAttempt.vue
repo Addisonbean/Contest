@@ -20,6 +20,16 @@
 		</div>
 
 		<div class="section">
+			<h2>Language</h2>
+			<p>{{ this.attempt.language }}</p>
+		</div>
+
+		<div class="section">
+			<h3>{{ this.attempt.file.filename }}</h3>
+			<p><pre class="source-code">{{ this.attempt.file.data }}</pre></p>
+		</div>
+
+		<div class="section">
 			<h2>Input used</h2>
 			<pre class="input">{{ this.problem.testInput }}</pre>
 		</div>
@@ -69,6 +79,7 @@ export default {
 			problem: {},
 			attempt: {
 				user: {},
+				file: {},
 			},
 			expectedLines: [],
 			runtimeLines: [],
@@ -188,5 +199,12 @@ export default {
 	.blank {
 		left: -10px;
 		position: relative;
+	}
+
+	.source-code {
+		text-align: left;
+		color: #333;
+		background-color: #ccc;
+		padding: 15px;
 	}
 </style>

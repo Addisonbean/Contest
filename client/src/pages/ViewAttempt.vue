@@ -13,6 +13,16 @@
 			<h2>Status</h2>
 			<p>{{ this.attempt.status }}</p>
 		</div>
+
+		<div class="section">
+			<h2>Language</h2>
+			<p>{{ this.attempt.language }}</p>
+		</div>
+
+		<div class="section">
+			<h3>{{ this.attempt.file.filename }}</h3>
+			<p><pre class="source-code">{{ this.attempt.file.data }}</pre></p>
+		</div>
 	</div>
 </template>
 
@@ -28,6 +38,7 @@ export default {
 			problem: {},
 			attempt: {
 				user: {},
+				file: {},
 			},
 		};
 	},
@@ -52,5 +63,12 @@ export default {
 
 	.section {
 		margin: 20px 0;
+	}
+
+	.source-code {
+		text-align: left;
+		color: #333;
+		background-color: #ccc;
+		padding: 15px;
 	}
 </style>

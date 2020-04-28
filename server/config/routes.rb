@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 	post '/contest/update', to: 'contests#update'
 	get '/contest', to: 'contests#show_current_contest'
 	get '/contest/problems', to: 'contests#problems_for_current_contest'
+	get '/contest/attempts', to: 'attempts#all_for_current_contest'
 	get '/contest/:id', to: 'contests#show'
 
 	get '/scoreboard', to: 'contests#scoreboard'
@@ -21,5 +22,4 @@ Rails.application.routes.draw do
 	post '/attempt/:id/grade', to: 'attempts#grade'
 	get '/attempt/:id', to: 'attempts#show'
 	get '/attempts', to: 'attempts#my_attempts'
-	get '/contest/attempts', to: 'attempts#all_for_current_contest'
 end
