@@ -31,7 +31,7 @@
 			</div>
 			<div>
 				<router-link :to="editLink" v-if="user.admin">
-					Edit problem
+					<button class="space_after">Edit problem</button>
 				</router-link>
 			</div>
 		</div>

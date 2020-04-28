@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { getCurrentContestProblems } from '../api/contest.js';
 import { submitAttempt } from '../api/attempt.js';
 import ErrorMsg from '../components/ErrorMsg.vue';
@@ -72,9 +73,16 @@ export default {
 			fileUploadStarted: false,
 		};
 	},
+	computed: {
+		...mapState(['loggedIn', 'user']),
+	},
 	async created() {
-		this.problems = await getCurrentContestProblems();
-		console.log(this.problems);
+		if(!this.loggedIn)
+			this.$router.push('/login');
+		else {
+			this.problems = await getCurrentContestProblems();
+			console.log(this.problems);
+		}
 	},
 	methods: {
 		fileChanged: function(e) {
