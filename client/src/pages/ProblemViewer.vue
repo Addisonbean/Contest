@@ -84,8 +84,9 @@ export default {
 	}
 	.container {
         width: 100%;
-		background: #f2f2f2;
+		background: rgba(240, 240, 240, 0.9);
 		color: #2c3e50;
+		padding: 30px;
     }
 	.input, .output {
         float: left; 

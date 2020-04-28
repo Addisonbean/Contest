@@ -15,8 +15,8 @@
 				<li>
 					<router-link to="/scoreboard">Scoreboard</router-link>
 				</li>
-				<li>
-					<router-link to="/">My Attempts</router-link>
+				<li v-if="displayMyAttempts">
+					<router-link to="/my-attempts">My Attempts</router-link>
 				</li>
 				<li v-if="displayAdminLinks">
 					<router-link to="/judge">Judge Menu</router-link>
@@ -29,7 +29,6 @@
 						<div v-else>
 							<router-link to="/login"  class = "log" >Log in</router-link>
 						</div>
-						<div>Settings?</div>
 					</div>
 				</li>
 			</ul>
@@ -47,9 +46,9 @@ export default {
 	name: 'app',
 	components: { 
 		Sidebar,
-		Burger
+		Burger,
 	},
-	method:{
+	methods: {
 		logout,
 	},
 	computed: {
@@ -101,7 +100,7 @@ body {
 .sidebar-panel-nav {
 	list-style-type: none;
 }
-ul.sidebar-panel-nav > li > a{
+ul.sidebar-panel-nav > li a{
 	color: #ffffff;
 	text-decoration: none;
 	font-size: 1.5rem;
