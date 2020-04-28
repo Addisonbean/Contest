@@ -18,11 +18,19 @@
 				<li>
 					<router-link to="/">My Attempts</router-link>
 				</li>
-				<li>
-					<router-link to="/contest/new">Add Contest (temp)</router-link>
+				<li v-if="displayAdminLinks">
+					<router-link to="/judge">Judge Menu</router-link>
 				</li>
 				<li>
-					<router-link to="/problems/new">Add Problem (temp)</router-link>
+					<div class="aside">
+						<div v-if="loggedIn">
+							<a href="#" @click.prevent="logout" class = "log">Log out</a>
+						</div>
+						<div v-else>
+							<router-link to="/login"  class = "log" >Log in</router-link>
+						</div>
+						<div>Settings?</div>
+					</div>
 				</li>
 			</ul>
 		</Sidebar>
@@ -33,12 +41,27 @@
 <script>
 import Sidebar from './components/Sidebar.vue';
 import Burger from './components/Burger.vue';
+import { mapState } from 'vuex';
+import { logout } from './api/user.js';
 
 export default {
 	name: 'app',
 	components: { 
 		Sidebar,
 		Burger
+	},
+	method:{
+		logout,
+	},
+	computed: {
+		...mapState(['loggedIn', 'user']),
+
+		displayAdminLinks: function() {
+			return this.user.admin;
+		},
+		displayMyAttempts: function() {
+			return this.loggedIn && !this.user.admin;
+		},
 	},
 	created: function() {
 		this.$store.dispatch('initializeState');
@@ -52,8 +75,12 @@ export default {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
+<<<<<<< Updated upstream
 	/* color: #2c3e50; */
 	color: #ccc;
+=======
+	color: #ffffff;
+>>>>>>> Stashed changes
 }
 html {
     min-height: 100%;
@@ -84,6 +111,14 @@ body {
 }
 
 ul.sidebar-panel-nav > li > a{
+	color: #ffffff;
+	text-decoration: none;
+	font-size: 1.5rem;
+	display: block;
+	padding-bottom: 0.5em;
+}
+
+.log{
 	color: #ffffff;
 	text-decoration: none;
 	font-size: 1.5rem;

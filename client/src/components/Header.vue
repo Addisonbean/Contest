@@ -1,4 +1,4 @@
-<template>
+<!--<template>
 	<header>
 		<div class="aside"></div>
 
@@ -105,4 +105,4 @@ header {
 h1{
 	color: #C0C0C0 ;
 }
-</style>
+</style>-->
