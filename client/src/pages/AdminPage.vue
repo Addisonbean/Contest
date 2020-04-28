@@ -12,10 +12,10 @@
 		<ul class = "navList">
 			<li>
 				<router-link to="/contest/new"><button>Add new contest</button></router-link>
-			</li>
+			</li><br>
 			<li>
 				<router-link to="/problem/new"><button>Add new problem</button></router-link>
-			</li>
+			</li><br>
 			<li>
 				<router-link to="/signup"><button>Add new user</button></router-link>
 			</li>
