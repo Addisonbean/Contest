@@ -13,8 +13,10 @@ import CreateProblem from './pages/CreateProblem.vue';
 import SubmitAttempt from './pages/SubmitAttempt.vue';
 import GradeAttempt from './pages/GradeAttempt.vue';
 import Attempts from './pages/Attempts.vue';
+import MyAttempts from './pages/MyAttempts.vue';
 import AdminPage from './pages/AdminPage.vue';
 import EditProblem from './pages/EditProblem.vue';
+import ViewAttempt from './pages/ViewAttempt.vue';
 
 import store from './store.js';
 
@@ -36,7 +38,9 @@ const router = new VueRouter({
 		{ path: '/problems/:problem/edit', component: EditProblem, props: true, name: 'EditProblem' },
 		{ path: '/contest/submit', component: SubmitAttempt },
 		{ path: '/problem/:problem_id/attempt/:id', component: GradeAttempt, props: true, name: 'GradeAttempt' },
+		{ path: '/problem/:problem_id/attempt/:id/view', component: ViewAttempt, props: true, name: 'ViewAttempt' },
 		{ path: '/attempts', component: Attempts },
+		{ path: '/my-attempts', component: MyAttempts },
 		{ path: '/judge', component: AdminPage },
 	],
 });

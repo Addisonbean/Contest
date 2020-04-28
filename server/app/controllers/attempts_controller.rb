@@ -1,8 +1,8 @@
 require 'base64'
 
 class AttemptsController < ApplicationController
-	before_action :authenticate_user, only: [:create]
-	before_action :authenticate_admin, only: [:grade, :show, :all_for_current_contest]
+	before_action :authenticate_user, only: [:create, :my_attempts]
+	before_action :authenticate_admin, only: [:grade, :all_for_current_contest]
 
 	def create
 		# TODO: require params[:attempt][:file] to not be nil
@@ -49,7 +49,12 @@ class AttemptsController < ApplicationController
 
 	def show
 		@attempt = Attempt.find_by_id(params[:id])
-		try_show(@attempt)
+		if current_user&.admin? || @attempt.user.id == current_user&.id
+			try_show(@attempt)
+		else
+			@msg = 'Unauthorized'
+			render 'shared/error', status: :unauthorized
+		end
 	end
 
 	def all_for_current_contest
@@ -58,4 +63,7 @@ class AttemptsController < ApplicationController
 		@attempts = current_contest.attempts
 	end
 
+	def my_attempts
+		@attempts = Attempt.where(user: current_user, contest: current_contest)
+	end
 end

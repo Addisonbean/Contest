@@ -35,9 +35,17 @@ function gradeAttempt(id, newStatus) {
 function getAttemptsForCurrentContest() {
 	return apiRequest({
 		method: 'GET',
+		path: '/contest/attempts',
+		auth: true,
+	}).then(r => r.data.attempts);
+}
+
+function getMyAttempts() {
+	return apiRequest({
+		method: 'GET',
 		path: '/attempts',
 		auth: true,
 	}).then(r => r.data.attempts);
 }
 
-export { submitAttempt, getAttempt, gradeAttempt, getAttemptsForCurrentContest };
+export { submitAttempt, getAttempt, gradeAttempt, getAttemptsForCurrentContest, getMyAttempts };

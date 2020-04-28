@@ -16,7 +16,7 @@
 						<router-link to="/scoreboard" class="nav-link">Scoreboard</router-link>
 					</li>
 					<li class="nav-item" v-if="displayMyAttempts">
-						<router-link to="/" class="nav-link">My Attempts</router-link>
+						<router-link to="/my-attempts" class="nav-link">My Attempts</router-link>
 					</li>
 					<li class="nav-item" v-if="displayAdminLinks">
 						<router-link to="/judge" class="nav-link">Judge Menu</router-link>
