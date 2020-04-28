@@ -112,6 +112,7 @@ export default {
 				};
 				try {
 					await submitAttempt(this.problemId, data);
+					this.$router.push('/scoreboard');
 				} catch (e) {
 					this.apiError = e.data;
 				}

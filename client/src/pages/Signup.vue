@@ -34,9 +34,8 @@ export default {
 	methods: {
 		submitForm: async function() {
 			try {
-				const res = await createUser(this.user);
-				console.log(res);
-				console.log(this.user);
+				await createUser(this.user);
+				this.$router.push('/judge');
 			} catch (e) {
 				this.apiError = e.data;
 			}

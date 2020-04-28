@@ -78,6 +78,7 @@ export default {
 		submitForm: async function() {
 			if (this.status !== '') {
 				await gradeAttempt(this.attempt.id, this.status);
+				this.$router.push('/attempts');
 			}
 		},
 		setupOutputDiff: function() {
