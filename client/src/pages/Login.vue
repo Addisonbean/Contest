@@ -35,7 +35,7 @@ export default {
 		submitForm: async function() {
 			try {
 				await login(this.user);
-				this.$router.push('/contest');
+				this.$router.push('/');
 			} catch (e) {
 				this.apiError = e.data;
 			}
