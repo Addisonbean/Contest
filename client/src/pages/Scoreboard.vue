@@ -54,11 +54,11 @@ export default {
 		sortedTeams: function() {
 			let sortedUsers = this.users.slice();
 			return sortedUsers.sort((u1, u2) => {
-				const diff = u2.totalSolved - u1.totalSolved;
+				const diff = u2.standing.totalSolved - u1.standing.totalSolved;
 				if (diff !== 0) {
 					return diff;
 				} else {
-					return u1.totalMinutes - u2.totalMinutes;
+					return u1.standing.totalMinutes - u2.standing.totalMinutes;
 				}
 			});
 		},
