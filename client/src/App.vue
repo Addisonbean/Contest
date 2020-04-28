@@ -24,12 +24,12 @@
 				<li>
 					<div class="aside">
 						<div v-if="loggedIn">
-							<a href="#" @click.prevent="logout" class = "log">Log out</a>
+							<a href="#" @click.prevent="logout" class = "log">Logout</a>
 						</div>
 						<div v-else>
-							<router-link to="/login"  class = "log" >Log in</router-link>
+							<router-link to="/login"  class = "log" >Login</router-link>
 						</div>
-						<div>Settings?</div>
+						<div class="log">Settings?</div>
 					</div>
 				</li>
 			</ul>
@@ -97,6 +97,7 @@ body {
 	display: flex;
 	justify-content: space-between;
 	padding: 0.5rem 0.8rem;
+	align-items: center;
 }
 .sidebar-panel-nav {
 	list-style-type: none;
@@ -106,12 +107,14 @@ ul.sidebar-panel-nav > li > a{
 	text-decoration: none;
 	font-size: 1.5rem;
 	display: block;
-	padding-bottom: 0.5em;
+	padding-bottom: 0.5em;;
+
 }
 .log{
 	color: #ffffff;
 	text-decoration: none;
 	font-size: 1.5rem;
+	padding-right: 2.5rem;
 	display: block;
 	padding-bottom: 0.5em;
 }

@@ -16,11 +16,8 @@
 	};
 </script>
 
-<style scoped>
-	h2 {
-		text-align: center;
-	}
+<style>
 	ul{
-		text-align: left;
+		text-align: center;
 	}
 </style>
