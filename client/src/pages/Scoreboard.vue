@@ -10,7 +10,9 @@
 				<tr>
 					<th scope="col"></th>
 					<th v-for="p in problems" v-bind:key="p.id">
-						{{ p.title }}
+						<router-link :to="problemPath(p)">
+							{{ p.title }}
+						</router-link>
 					</th>
 					<th scope="col">Totals</th>
 					<th scope="col"></th>
@@ -67,6 +69,11 @@ export default {
 		let scores = await getCurrentScoreboard();
 		this.users = scores.users;
 		this.problems = scores.problems;
+	},
+	methods: {
+		problemPath: function(problem) {
+			return `/problems/${problem.title}`;
+		}
 	},
 };
 </script>

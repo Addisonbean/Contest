@@ -6,10 +6,9 @@
 					<h3 class="left">{{ a.problem.title }}</h3>
 					<p class="right">{{ formatDateTime(a.createdAt) }}</p>
 				</div>
-
 				<div class="cf">
 					<p class="left">Status - {{ a.status }}</p>
-					<router-link :to="linkForAttempt(a)" class="right">View submission</router-link>
+					<router-link :to="linkForAttempt(a)" class="right"><button>View submission</button></router-link>
 				</div>
 			</li>
 		</ul>
