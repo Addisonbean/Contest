@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<ul>
+		<ul style ="list-style: none;">
 			<li><a href ="/docs/javaDoc/index.html" target = "_blank">Java Documentation</a></li>
 			<li><a href ="/docs/pythonDoc/index.html" target = "_blank">Python Documentation</a></li>
 			<li><a href ="/docs/c++Doc/reference/en/index.html" target = "_blank">C++ Documentation</a></li>

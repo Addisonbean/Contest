@@ -3,22 +3,22 @@
 		<h2>Judge Menu</h2>
 
 		<h3>Current contest</h3>
-		<ul>
+		<ul class= "navList">
 			<li>
-				<router-link to="/attempts"><button>View attempts</button></router-link>
+				<router-link to="/attempts">View attempts</router-link>
 			</li>
 		</ul>
 		<h3>General links</h3>
-		<ul>
+		<ul class = "navList">
 			<li>
-				<router-link to="/contest/new"><button>Add new contest</button></router-link>
-			</li><br>
+				<router-link to="/contest/new">Add new contest</router-link>
+			</li>
 			<li>
-				<router-link to="/problem/new"><button>Add new problem</button></router-link>
-			</li><br>
+				<router-link to="/problem/new">Add new problem</router-link>
+			</li>
 			<li>
-				<router-link to="/signup"><button>Add new user</button></router-link>
-			</li><br>
+				<router-link to="/signup">Add new user</router-link>
+			</li>
 		</ul>
 	</div>
 </template>
@@ -29,9 +29,15 @@ export default {
 };
 </script>
 
-<style scoped>
-ul {
+<style>
+.navList{	
 	list-style-type: none;
-	padding: 0;
+}
+ul>li>a{
+	text-decoration: none!important;
+	color: #ffffff;
+	font-size: 1.5rem;
+	display: block;
+	padding-right: 2.5rem;
 }
 </style>

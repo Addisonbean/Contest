@@ -11,6 +11,7 @@ export default new Vuex.Store({
 		loggedIn: false,
 		user: newEmptyUser(),
 		contest: newEmptyContest(),
+		isNavOpen: false,
 	},
 	mutations: {
 		login: function(state, user) {
@@ -24,6 +25,12 @@ export default new Vuex.Store({
 		setContest: function(state, contest) {
 			state.contest = contest;
 		},
+		setIsNavOpen: function(state, yesno){
+			state.isNavOpen = yesno;
+		},
+		toggleNav: function(state){
+			state.isNavOpen = !state.isNavOpen;
+		}
 	},
 	actions: {
 		initializeState: async function({ commit }) {
